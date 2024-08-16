@@ -1,0 +1,37 @@
+.textfront
+{
+    /* display: flex;
+    justify-content: center; */
+    /* border: 2px solid black; */
+    font-size: 60px;
+    text-align: center;
+    width: min(70vw,558px);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    
+}
+.textfront-encloser
+{
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid green; */
+    padding-top: 60px;
+    line-height: 58px;
+}
+.barencloser
+{
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid red; */
+    padding-top: 15px;
+}
+.bar
+{
+    padding: 20px;
+    border-radius: 50px;
+    display: flex;
+    align-self: center;
+    font-size: 20px;
+    width: min(70vw,558px);
+    border-color: aliceblue;
+}

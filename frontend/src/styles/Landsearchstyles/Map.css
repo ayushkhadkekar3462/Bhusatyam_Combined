@@ -1,0 +1,58 @@
+/* Map.css */
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.markerimg {
+  width: 20px;
+  height: 20px;
+  mix-blend-mode:multiply;
+}
+
+.popup-card {
+  width: 220px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 1);
+  background-color: white;
+}
+
+.popup-image {
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+}
+
+.popup-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.popup-content h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.popup-content p {
+  margin: 5px 0 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.popup-close-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.popup-close-btn:hover {
+  color: #333;
+}

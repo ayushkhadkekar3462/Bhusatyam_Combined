@@ -1,0 +1,39 @@
+.card-slider {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
+    /* border: 2px solid black; */
+  }
+  
+  .card {
+    background-color: #80ce9e;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    /* padding: 20px; */
+    text-align: center;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    height: 250px;
+    width: 250px;
+    background-position: -210px -120px;
+    
+  }
+  
+  .card h3 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .card p {
+    font-size: 1em;
+    color: #666;
+  }
+  .cardbottom
+  {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    
+  }
+  

@@ -1,0 +1,140 @@
+/* src/Footer.css */
+
+.footer {
+  background-color:#e3eae6;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-left, .footer-right {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.footer-left {
+  text-align: left;
+  width: 50%;
+}
+
+.footer-left .links {
+  display: flex;
+  text-align: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-left .links a {
+
+  /* width: 50%; */
+  text-decoration: none;
+  color: #333;
+  margin: 5px 0;
+}
+
+.footer-right {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center ;
+}
+
+.footer-right .subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-right input {
+  padding: 10px;
+  width: 60%;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.footer-right button {
+  padding: 10px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* .footer-right {
+  text-align: right;
+  width: 33%;
+} */
+
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.footer-bottom {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.footer-bottom .bottom-links {
+  margin-bottom: 10px;
+}
+
+.footer-bottom .bottom-links a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333;
+}
+
+.copyright {
+  width: 100%;
+  background-color:#e3eae6;
+  padding: 20px;
+  /* display: flex; */
+  text-align: center;
+  font-size: 0.9em;
+}
+
+
+/*for responsive design*/
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+  }
+
+  .footer-left, .footer-right {
+    width: 100%;
+  }
+
+  .footer-left .links {
+    justify-content: center;
+  }
+
+  .footer-right .subscribe {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-right input {
+    width: min(100%, 500px);
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .footer-right button {
+    width: min(100%, 500px);
+    }
+
+  .social-icons {
+    margin: 10px 0;
+  }
+
+  .social-icons a {
+    margin: 0 5px;
+  }
+}

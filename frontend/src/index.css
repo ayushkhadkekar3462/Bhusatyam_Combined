@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #e3eae6;
+}
+/* index.css */
+
+.dark #moonicon {
+  color: #ffffff;
+}
+body.dark {
+  background-color: #141b18;
+  color: #e0e9e5;
+}
+
+/* Add other dark mode styles here */
+/* .dark .header {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  } */
+
+.dark .nav-link {
+  color: #ffffff;
+}
+
+.dark .navbar-offcanvas {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark .offcanvas-header {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* .dark .offcanvas-body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  } */
+
+.dark .footer {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark .footer a {
+  color: #ffffff;
+}
+
+.dark .footer input {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark .footer input::placeholder {
+  color: #ffffff;
+}
+
+.dark .footer input:focus {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark .footer input::selection {
+  background: #21693b; /* Background color for the selected text */
+  color: #ffffff; /* Text color for the selected text */
+}
+
+.dark .copyright {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark .footer .footer-left a {
+  color: #ffffff;
+}
+/* .dark .card-slider{
+    background-color: #161616;
+ }
+ 
+  .dark .besidecard{
+    background-color: #161616;
+ } */
+
+.dark .sliderencloser .wholeslider {
+  background-color: #202623;
+}
+
+.dark .bar {
+  background-color: #000000;
+}
+.dark .info {
+  background-color: #202623;
+}
+
+.dark .page2 {
+  background-color: #141b18;
+}
+
+.dark .propertycard {
+  background-color: #3a433e;
+}
+::selection {
+  background: #21693b; /* Background color for the selected text */
+  color: #ffffff; /* Text color for the selected text */
+}

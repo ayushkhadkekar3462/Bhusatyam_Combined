@@ -1,0 +1,119 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&family=Teachers:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&display=swap');
+
+.header{
+  background-color: transparent;
+}
+.headerText{
+  /* font-size: 15px; */
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  /* font-family: "Anek Devanagari", sans-serif; */
+  margin-right: 1vw;
+  color: rgb(0, 0, 0);
+ margin-top: 10px;
+}
+/* .navdropdownitem {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 500 !important;
+  font-size: large;
+  color: #212529;
+
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  
+  border: 0;
+  text-align: left;
+  text-decoration: none;
+} */
+
+/* .navdropdownitem:hover,
+.navdropdownitem:focus {
+  color: #13a7d0 !important;
+    text-decoration: none;
+    background-color: #2e3b4e !important;
+
+  transition: background-color 0.3s ease;
+  scale: 1.1;
+} */
+.clicklinks{
+  font-size: 17px;
+  font-family: "Poppins", sans-serif;
+}
+.clicklinks:hover{
+  transition: transform 0.4s ease;
+   text-decoration: underline;
+  /* color: rgb(136, 201, 255)  !important; */
+  /* scale: 1.1 !important; */
+  /* text-shadow: currentColor 0px 0px 10px; */
+}
+/* .navbardropdowntitle {
+  color: white !important;
+  font-family: 'Times New Roman', Times, serif; */
+  /* font-family: "Poppins", sans-serif; */
+  /* font-family: "Teachers", sans-serif; */
+  /* font-family: "Sedan SC", serif;
+  font-family: "Anek Devanagari", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.4rem;
+} */
+
+/* .navbardropdowntitle:hover{
+    color: #07c8fe !important;
+;
+} */
+.offcanvasclosebtn,
+.offcanvas-toggle-btn {
+  color: white !important;
+ 
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+/*dropdown hover */
+/* .navbardropdown {
+  position: relative;
+}
+
+.navbardropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: pink;
+}
+
+.navbardropdown.show .dropdown-menu {
+  display: block;
+} */
+
+/*logo css*/
+/* .cfalogo{
+  margin-left: 1vw;
+  height: 8vh;
+  transition: transform 0.4s ease;
+} */
+
+/* .cfalogo:hover{
+  transform: scale(1.1);
+  scale: 1.1;
+  cursor: pointer;
+}  */
+
+
+
+
+
+/*styles for dark mode */
+

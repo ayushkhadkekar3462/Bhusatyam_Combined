@@ -32,6 +32,7 @@ import Saved from "../pages/BhusatyamNGF/Saved/Saved.jsx";
 import Setting from "../pages/BhusatyamNGF/Setting/Setting.jsx";
 // import Createlisting from "./pages/BhusatyamNGF/MarketPlace/Createlisting";
 import Layout from '../Layout.jsx';
+import Postproperty from '../components/Landcomp/Postproperty.jsx';
 
 function Pages() {
   return (
@@ -40,6 +41,7 @@ function Pages() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/component" element={<ResponsiveComponent />} />
+      <Route path="/Postproperty" element={<Postproperty />} />
       <Route path="/signup" element={<Username />} />
       <Route path="/register" element={<Register />} />
       <Route path="/password" element={<Password />} />

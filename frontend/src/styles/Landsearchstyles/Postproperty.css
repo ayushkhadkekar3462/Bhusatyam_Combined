@@ -1,0 +1,205 @@
+/* Existing Styles */
+.advertise-container-postproperty {
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: #4b5660;
+    width: 78%;
+  }
+  
+  .advertise-content-postproperty {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    gap: 0px;
+    align-items: flex-start;
+  }
+  
+  /* Title and Subtitle Section */
+  .advertise-info-postproperty {
+    flex: 1 1 100%;
+    text-align: left;
+  }
+  
+  .advertise-title-postproperty {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #141a26;
+    margin-bottom: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .advertise-subtitle-postproperty {
+    font-size: 1.2rem;
+    color: #4b5660;
+    margin-bottom: 40px;
+    width: 70%;
+  }
+  
+  /* ROI Section */
+  .advertise-section-postproperty {
+    flex: 1 1 48%;
+    max-width: 48%;
+  }
+  
+  .section-title-postproperty {
+    font-size: 1.5rem;
+    color: #141a26;
+    margin-bottom: 20px;
+  }
+  
+  .benefits-list-postproperty {
+    list-style-type: none;
+    padding: 0;
+    color: #4b5660;
+    font-size: 1rem;
+  }
+  
+  .benefits-list-postproperty li {
+    margin-bottom: 10px;
+  }
+  
+  /* Features Grid Section */
+  .features-grid-postproperty {
+    flex: 1 1 48%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 48%;
+  }
+  
+  .feature-postproperty {
+    background-color: #e3eae6;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-postproperty h3 {
+    font-size: 1.2rem;
+    color: #141a26;
+    margin: 10px 0;
+  }
+  
+  .feature-postproperty p {
+    color: #4b5660;
+    font-size: 0.95rem;
+  }
+  
+  .icon-postproperty {
+    font-size: 2rem;
+    color: #4b5660;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .advertise-content-postproperty {
+      flex-direction: column;
+    }
+  
+    .advertise-section-postproperty,
+    .features-grid-postproperty {
+      max-width: 100%;
+    }
+  
+    .features-grid-postproperty {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* New Pricing Component Styles */
+  .pricing-container-postproperty {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    /* background-color: #f5f8f6; */
+    border-radius: 12px;
+    width: 78%;
+    gap:25px;
+  }
+  
+  .pricing-card-postproperty {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    
+  }
+  
+  .pricing-title-postproperty {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #141a26;
+    margin-bottom: 10px;
+  }
+  
+  .pricing-description-postproperty {
+    font-size: 1rem;
+    color: #4b5660;
+    margin-bottom: 20px;
+  }
+  
+  .pricing-cost-postproperty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .pricing-amount-postproperty {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #141a26;
+  }
+  
+  .pricing-period-postproperty {
+    font-size: 1rem;
+    color: #4b5660;
+  }
+  
+  .pricing-details-postproperty {
+    font-size: 0.9rem;
+    color: #4b5660;
+    margin-bottom: 10px;
+  }
+  
+  .pricing-button-postproperty {
+    background-color: #214d35;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .pricing-button-postproperty:hover {
+    background-color: #1a3f2b;
+  }
+  .Foot-text-postproperty
+  {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    
+  }
+  .Foot-text-insider1-postproperty
+  {
+font-size: 35px;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  .Foot-text-insider2-postproperty
+  {
+        width:40%;
+        text-align: center;
+        font-size: 18px;
+  }
+  

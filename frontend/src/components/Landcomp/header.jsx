@@ -38,7 +38,7 @@ function Header() {
         <Navbar key={expand} expand={expand} >
           <Container fluid>
             <div className="flex">
-              <Link to="/" className="font-bold text-2xl text-gray-500">
+              <Link to="/" style={{fontFamily:"Cambria",fontSize:"18px"}} className="font-bold text-2xl text-gray-500">
                 <h1>Bhusatyam Technology</h1>
               </Link>
               {!isMobile && (
@@ -69,7 +69,7 @@ function Header() {
                   <Link className={`nav-link  ${styles.clicklinks}`} to="#">Find agent</Link>
                 </>
               )}
-                  <Link className={`nav-link  ${styles.clicklinks}`} to="#">Post property</Link>
+                  <Link className={`nav-link  ${styles.clicklinks}`} to="/Postproperty">Post property</Link>
                   <Link className={`nav-link ${styles.clicklinks}`} to="#">Log in</Link>
                   <Link className={`nav-link ${styles.clicklinks}`} to="/signup">Sign up</Link>
                   <button className="p-2   rounded-full" onClick={toggletheme}>{isDarkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} id="moonicon"/>} </button>

@@ -2,7 +2,7 @@ import React from 'react'
 import '../../../styles/NGFpagestyle/pagestyle/Productioncontracts.css';
 function Productioncontracts() {
   return (
-    <><div className="">
+    <>
     <div className="pageheader w-[90vw]"><h1>New Production Contract</h1></div>
     <div className="unique-form-container ">
             <h2 className="unique-form-title">General</h2>
@@ -123,7 +123,7 @@ function Productioncontracts() {
         </div>
             </form>
         </div>
-        </div>
+        
         </>
   )
 }

@@ -8,7 +8,7 @@
   display: flex;
 }
 main {
-  margin-left: 80px; /* Adjusted to account for the fixed sidebar */
+  margin-left: 30px; /* Adjusted to account for the fixed sidebar */
   padding: 10px;
   flex-grow: 1;
   overflow-y: auto;

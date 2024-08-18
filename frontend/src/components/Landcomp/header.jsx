@@ -66,7 +66,7 @@ function Header() {
                 {isMobile && (
                 <>
                   <Link className={`nav-link  ${styles.clicklinks}`} to="/Component">Buy land</Link>
-                  <Link className={`nav-link  ${styles.clicklinks}`} to="#">Find agent</Link>
+                  <Link className={`nav-link  ${styles.clicklinks}`} to="/FindAgent">Find agent</Link>
                 </>
               )}
                   <Link className={`nav-link  ${styles.clicklinks}`} to="/Postproperty">Post property</Link>

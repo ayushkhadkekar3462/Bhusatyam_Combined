@@ -1,6 +1,7 @@
 import cfalogo from "./cfalogo.png";
+import findagent from "./FindAgent/findagent.jpeg";
 
-
-export {
-    cfalogo
+export  {
+    cfalogo,
+    findagent
 }

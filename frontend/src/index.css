@@ -102,6 +102,25 @@ body.dark {
 .dark .propertycard {
   background-color: #3a433e;
 }
+
+
+/*dark theme for find agent page*/
+.dark .findagent {
+  background-color: #141b18;
+}
+
+
+ .dark .main-pageagent  , .dark .leftsideagent , .dark .rightsideagent , .dark .contentagent {
+  color: #000000;
+  background-color: #141b18;
+ }
+
+ .dark .broker-card , .dark .property-card{
+  background-color: #41554b;
+  color: #ffffff;
+ }
+
+
 ::selection {
   background: #21693b; /* Background color for the selected text */
   color: #ffffff; /* Text color for the selected text */

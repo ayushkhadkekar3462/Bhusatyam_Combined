@@ -1,0 +1,172 @@
+/* Basic resets */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Search Bar */
+
+
+#search-bar-agent{
+  /* display: flex;
+  justify-content: start !important; */
+  padding: 10px;
+}
+
+
+
+.main-pageagent{
+display: flex ;
+justify-content: space-between;
+/* align-items: center; */
+flex-direction: row;
+flex-wrap: wrap;
+}
+
+.leftsideagent{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 69vw;
+  /* height: 100vh; */
+  background-color: #e3eae6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rightsideagent{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 29vw;
+  /* height: 100vh; */
+  background-color: #e3eae6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contentagent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* height: 100vh; */
+  background-color: #e3eae6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input, .specialties-dropdown, .search-button {
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+
+.search-input{
+  /* width : 300px; */
+  width: min(300px,50vw);
+}
+.search-button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+/* Broker List */
+.broker-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+ 
+
+
+.broker-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  /* flex: 1; */
+  max-width: 200px;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.broker-card h3 {
+  margin: 0 0 10px;
+}
+
+.broker-card p {
+  margin: 5px 0;
+}
+
+.broker-card a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+/* Property Section */
+.properties-section {
+  padding: 20px;
+}
+
+.property-card {
+  
+  display: flex;
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.property-image {
+  width: 150px;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.property-info span {
+  color: grey;
+}
+
+.property-info h4 {
+  margin: 0 0 10px;
+}
+
+.property-info p {
+  margin: 5px 0;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .broker-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .property-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .property-image {
+    margin-bottom: 15px;
+  }
+  .search-bar-agent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    padding: 10px;
+  }
+}

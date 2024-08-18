@@ -33,6 +33,7 @@ import Setting from "../pages/BhusatyamNGF/Setting/Setting.jsx";
 // import Createlisting from "./pages/BhusatyamNGF/MarketPlace/Createlisting";
 import Layout from '../Layout.jsx';
 import Postproperty from '../components/Landcomp/Postproperty.jsx';
+import FindAgent from '../components/Landcomp/FindAgent.jsx';
 
 function Pages() {
   return (
@@ -41,6 +42,8 @@ function Pages() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/component" element={<ResponsiveComponent />} />
+      <Route path="/FindAgent" element={<FindAgent />} />
+
       <Route path="/Postproperty" element={<Postproperty />} />
       <Route path="/signup" element={<Username />} />
       <Route path="/register" element={<Register />} />

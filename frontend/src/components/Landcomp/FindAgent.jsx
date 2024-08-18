@@ -52,14 +52,14 @@ const FindAgent = () => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   
-  const itemsPerPage = 16;
+  const itemsPerPage = 9;
 
   // Calculate current brokers to display
   const indexOfLastBroker = currentPage * itemsPerPage;
   const indexOfFirstBroker = indexOfLastBroker - itemsPerPage;
   const currentBrokers = brokers.slice(indexOfFirstBroker, indexOfLastBroker);
 
-   let totalbrokes = brokers.length;
+  //  let totalbrokes = brokers.length;
 
   // Handle page change
   const handleNext = () => {

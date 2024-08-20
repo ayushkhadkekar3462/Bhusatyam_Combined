@@ -43,8 +43,8 @@ function Header() {
               </Link>
               {!isMobile && (
                 <>
-                  <Link className={`nav-link pt-2 ml-10 ${styles.clicklinks}`} to="/Component">Buy land</Link>
-                  <Link className={`nav-link pt-2 mr-4 ml-4 ${styles.clicklinks}`} to="/FindAgent">Find agent</Link>
+                  <Link className={`nav-link pt-2 ml-10 ${styles.clicklinks}`} to="/Component">Buy Crop</Link>
+                  <Link className={`nav-link pt-2 mr-4 ml-4 ${styles.clicklinks}`} to="/FindAgent">Locate Crop</Link>
                 </>
               )}
             </div>

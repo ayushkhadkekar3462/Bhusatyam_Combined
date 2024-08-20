@@ -35,3 +35,47 @@
     width: min(70vw,558px);
     border-color: aliceblue;
 }
+.suggestions-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f2f7f3; /* light background color */
+    border: 1px solid #e0e0e0; /* light border */
+    position: absolute; /* Make it overlap other components */
+    z-index: 1000; /* Ensure it is on top */
+    max-height: 300px;
+    overflow-y: auto;
+    width: min(70vw,558px);
+    font-family: Arial, sans-serif;
+  }
+  
+  .suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0; /* Separating each item */
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #e6ebe8; /* Light gray for hover */
+  }
+  
+  .suggestions-list li:first-child {
+    border-top: 1px solid #e0e0e0; /* Top border for the first item */
+  }
+  
+  .suggestions-list li:last-child {
+    border-bottom: none; /* Remove bottom border for the last item */
+  }
+  
+  .suggestion-title {
+    font-weight: bold;
+    color: #2c2c2c; /* Dark gray */
+    margin-bottom: 3px;
+  }
+  
+  .suggestion-subtitle {
+    color: #8c8c8c; /* Lighter gray */
+    font-size: 0.9em; /* Slightly smaller font size */
+  }
+  
+  

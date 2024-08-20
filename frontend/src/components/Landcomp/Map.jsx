@@ -102,6 +102,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as parkDate from "../../data/skateboard-parks.json";
 import "../../styles/Landsearchstyles/Map.css";
+import { useLocation } from 'react-router-dom';
 
 // Ensure Mapbox access token is set
 mapboxgl.accessToken = "pk.eyJ1IjoiYXl1c2hraGFka2VrYXIiLCJhIjoiY2x6ZWY0dzR2MG9zcTJxcXE5dWQ4czA5ZSJ9.4VTm_Sy8KPMq6lY9-jatJA";
@@ -113,6 +114,8 @@ const Map = () => {
   const [lat, setLat] = useState(45.4211);
   const [zoom, setZoom] = useState(10);
   const [currentPopup, setCurrentPopup] = useState(null);
+  const location = useLocation();
+  const { lat: selectedLat, lng: selectedLng } = location.state || {};
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -128,6 +131,10 @@ const Map = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
+    if (selectedLat && selectedLng) {
+      map.current.setCenter([selectedLng, selectedLat]);
+      map.current.setZoom(12); // Adjust zoom level as needed
+    }
 
     parkDate.features.forEach(park => {
       const el = document.createElement('div');

@@ -72,7 +72,7 @@ function Header() {
                   <Link className={`nav-link  ${styles.clicklinks}`} to="/Postproperty">Post property</Link>
                   {/* <Link className={`nav-link ${styles.clicklinks}`} to="#">Log in</Link> */}
                   <Link className={`nav-link ${styles.clicklinks}`} to="/signup">Log in/Sign up</Link>
-                  <button className="p-2   rounded-full" onClick={toggletheme}>{isDarkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} id="moonicon"/>} </button>
+                  <button className="p-2   rounded-full" onClick={toggletheme}>{isDarkMode ? <FontAwesomeIcon icon={faSun} className="text-white"/> : <FontAwesomeIcon icon={faMoon} id="moonicon"/>} </button>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>

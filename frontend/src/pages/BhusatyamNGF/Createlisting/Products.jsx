@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -42,7 +42,7 @@ const Button = styled.button`
   background-color: #ff6b6b;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   cursor: pointer;
 `;
 
@@ -89,23 +89,57 @@ const SmallImage = styled.div`
 `;
 
 
+// const  handleImageUpload=()=>{
+//  document.getElementsByClassName('ImageInputProperty')[0].value = '';
+// }
+
+
+
+
 function Products() {
+
+  //Logic to ulpoad the image 
+const [image , setImage] = useState(null);
+
+const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if(file){
+    setImage(URL.createObjectURL(file));
+  }
+};
+
+const removeImage = () => {
+setImage(null);
+}
+;
   return (
     <>
     <div className="pageheader w-[90vw]"><h1>Products</h1></div>
     <Container>
       <ImageUploadSection>
-        <ImageUpload className='hover:bg-gray-300 cursor-pointer duration-500 hover:scale-105'>
-          <input type="file" style={{ display: 'none' }} />
-          <span>Upload photo of product</span>
-          <Button style={{ position: 'absolute', bottom: '10px', right: '10px' }}>Remove</Button>
-        </ImageUpload>
+      <ImageUpload className=' bg-gray-300 hover:bg-white hover:shadow-md cursor-pointer duration-200 '>
+      <input 
+        type="file" 
+        accept="image/*" 
+        // position="relative"
+        style={{ display: 'none' , }} 
+        id="upload" 
+        onChange={handleImageUpload} 
+      />
+      <label htmlFor="upload" style={{ cursor: 'pointer' }}>
+        {!image ? <span className='hover:scale-105 '>Upload photo of product</span> : <img src={image} alt="Uploaded" style={{width: '100%', 
+              height: 'auto', 
+              objectFit: 'contain', 
+              aspectRatio: '2/3' }} />}
+      </label>
+  <Button style={{ position: 'absolute', bottom: '10px', right: '10px' }}  onClick={removeImage} className='hover:bg-green-500 duration-300 hover:scale-105 rounded' >Remove</Button>
+</ImageUpload>
         <ImageCarousel>
-          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-110 duration-500 cursor-pointer'>+</SmallImage>
-          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-110 duration-500 cursor-pointer'>+</SmallImage>
-          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-110 duration-500 cursor-pointer'>+</SmallImage>
-          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-110 duration-500 cursor-pointer'>+</SmallImage>
-          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-110 duration-500 cursor-pointer'>+</SmallImage>
+          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer'>+</SmallImage>
+          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer'>+</SmallImage>
+          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer'>+</SmallImage>
+          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer'>+</SmallImage>
+          <SmallImage className='grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer'>+</SmallImage>
         </ImageCarousel>
       </ImageUploadSection>
 
@@ -113,28 +147,49 @@ function Products() {
         <FormGroup className='grid place-items-center'>
           <Label>Category</Label>
         
-          <Select>
-            <option value="">Select category</option>
-          </Select>
+          <Select defaultValue="">
+  <option value="" disabled>Select Category</option>
+  <option value="Grains">Grains</option>
+  <option value="Hay/Grass">Hay/Grass</option>
+  <option value="Oilseeds">Oilseeds</option>
+  <option value="Pulses">Pulses</option>
+  <option value="Seeds">Seeds</option>
+</Select>
+
         </FormGroup>
 
         <FormGroup className='grid place-items-center'>
           <Label>Crop year</Label>
-          <Input type="text" placeholder="Enter crop year" />
+          <Select defaultValue="">
+        <option value="" disabled>Select Cropyear</option>
+        <option value="">2021</option>
+        <option value="">2022</option>
+        <option value="">2023</option>
+        <option value="">2024</option>
+        <option value="">2025</option>
+</Select>
         </FormGroup>
 
         <FormGroup className='grid place-items-center'>
           <Label>Product</Label>
-          <Select>
-            <option value="">Select product</option>
-          </Select>
+          <Select defaultValue="">
+        <option value="" disabled>Select Product</option>
+        <option value="">Canola</option>
+        <option value="">Flax</option>
+        <option value="">Mustard</option>
+        <option value="">Soyabeans</option>
+        <option value="">Sunflower</option>
+</Select>
         </FormGroup>
 
         <FormGroup className='grid place-items-center'>
           <Label>Type</Label>
-          <Select>
-            <option value="">Select type</option>
-          </Select>
+          <Select defaultValue="">
+        <option value="" disabled>Select Type</option>
+        <option value="">Brown</option>
+        <option value="">Golden</option>
+       
+</Select>
         </FormGroup>
 
         <FormGroup className='grid place-items-center'>
@@ -144,7 +199,15 @@ function Products() {
 
         <FormGroup className='grid place-items-center'>
           <Label>Unit of Measure</Label>
-          <Input type="text" placeholder="Enter unit of measure" />
+          <Select defaultValue="">
+        <option value="" disabled>Select Unit of measure</option>
+        <option value="">Bales</option>
+        <option value="">Bushels</option>
+        <option value="">CWt (100lbs)</option>
+        <option value="">LBS</option>
+        <option value="">Metric Tons</option>
+        <option value="">Short Tons(2000lbs)</option>
+       </Select>
         </FormGroup>
 
         <FormGroup className='grid place-items-center'>

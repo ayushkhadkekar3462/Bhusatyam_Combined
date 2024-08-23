@@ -1,8 +1,11 @@
 import UserModel from '../model/User.model.js'
+import createlisting_product, { createlisting_productSchema } from '../model/createlisting_product.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ENV from '../config.js'
 import otpGenerator from 'otp-generator';
+import multer from 'multer';
+import path from 'path';
 
 /** middleware for verify user */
 export async function verifyUser(req, res, next){
@@ -275,3 +278,81 @@ export async function resetPassword(req,res){
 }
 
 
+
+
+
+
+// create listing product controllers
+/** POST: http://localhost:8080/api/createlisting */
+
+export async function uploadcreatelisting_product(req, res) {
+    try {
+        const {
+            category,
+            cropyear,
+            product,
+            type,
+            unitofmeasure,
+            expirydate,
+            total,
+            price,
+            details,
+            location,
+            specificationtype,
+            addspecification,
+            additionalinfo
+        } = req.body;
+
+        // Validate required fields before proceeding
+        if (!category || !cropyear || !product || !type || !unitofmeasure || !expirydate || !total || !price || !details || !location || !specificationtype || !addspecification || !additionalinfo) {
+            return res.status(400).send({ error: "All fields are required" });
+        }
+
+        // Create a new product listing document without userId
+        const newProductListing = new createlisting_product({
+            category,
+            cropyear,
+            product,
+            type,
+            unitofmeasure,
+            expirydate,
+            total,
+            price,
+            details,
+            location,
+            specificationtype,
+            addspecification,
+            additionalinfo
+        });
+
+        // Save the listing to the database
+        const savedListing = await newProductListing.save();
+
+        // Respond with success message and the saved listing
+        return res.status(201).send({ msg: "Product listing created successfully", data: savedListing });
+
+    } catch (error) {
+        console.error("Error during product listing creation:", error);
+
+        // Provide a more user-friendly error message
+        const errorMessage = error.message || "An unknown error occurred during product listing creation";
+        
+        // If it's a validation error, return 400 status
+        if (error.name === "ValidationError") {
+            return res.status(400).send({ error: errorMessage });
+        }
+
+        // For other errors, return a 500 status
+        return res.status(500).send({ error: errorMessage });
+    }
+}
+
+export const getcreatelisting_products = async (req, res) => {
+    try {
+      const products = await createlisting_product.find(); // Retrieve all products
+      res.status(200).json(products);
+    } catch (error) {
+      res.status(500).json({ message: 'Server Error', error });
+    }
+  };
+  

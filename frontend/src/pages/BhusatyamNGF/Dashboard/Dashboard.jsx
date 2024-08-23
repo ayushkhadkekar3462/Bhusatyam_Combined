@@ -1,8 +1,11 @@
 import React from 'react';
 import '../../../styles/NGFpagestyle/pagestyle/Dashboard.css';
+import Products from '../../../components/NGFcomp/createlisting/products';
+
 
 const Dashboard = () => {
   return (
+    <>
     <div className="dashboard-container1">
       <header className="dashboard-header1">
         <span>User ID: dtOBDp9EYP</span>
@@ -32,6 +35,8 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+    {/* <Products/> */}
+    </>
   );
 };
 

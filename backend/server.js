@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by'); // less hackers know about our stack
-// app.use('/public/temp', express.static('uploads'));
+app.use('/public/temp', express.static('uploads'));
 
 
 const port = 8080;

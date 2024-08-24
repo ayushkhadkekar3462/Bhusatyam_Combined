@@ -70,11 +70,11 @@ export const createlisting_productSchema = new mongoose.Schema({
         required : [false, "Please provide additionalinfo"],
         unique : false,
     },
-    // image: {
-    //     type: String,
-    //     required : [false, "Please provide additionalinfo"],
-    //     unique : false,
-    // },
+    image: {
+        type: String,
+        required : [false, "Please provide additionalinfo"],
+        unique : false,
+    },
     
 });
 

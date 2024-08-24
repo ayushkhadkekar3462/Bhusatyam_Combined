@@ -6,6 +6,7 @@ import ENV from '../config.js'
 import otpGenerator from 'otp-generator';
 import multer from 'multer';
 import path from 'path';
+import { upload } from '../middleware/multer.middleware.js';
 
 /** middleware for verify user */
 export async function verifyUser(req, res, next){
@@ -285,6 +286,67 @@ export async function resetPassword(req,res){
 // create listing product controllers
 /** POST: http://localhost:8080/api/createlisting */
 
+// export async function uploadcreatelisting_product(req, res) {
+//     try {
+//         const {
+//             category,
+//             cropyear,
+//             product,
+//             type,
+//             unitofmeasure,
+//             expirydate,
+//             total,
+//             price,
+//             details,
+//             location,
+//             specificationtype,
+//             addspecification,
+//             additionalinfo
+//         } = req.body;
+
+//         // Validate required fields before proceeding
+//         if (!category || !cropyear || !product || !type || !unitofmeasure || !expirydate || !total || !price || !details || !location || !specificationtype || !addspecification || !additionalinfo) {
+//             return res.status(400).send({ error: "All fields are required" });
+//         }
+
+//         // Create a new product listing document without userId
+//         const newProductListing = new createlisting_product({
+//             category,
+//             cropyear,
+//             product,
+//             type,
+//             unitofmeasure,
+//             expirydate,
+//             total,
+//             price,
+//             details,
+//             location,
+//             specificationtype,
+//             addspecification,
+//             additionalinfo
+//         });
+
+//         // Save the listing to the database
+//         const savedListing = await newProductListing.save();
+
+//         // Respond with success message and the saved listing
+//         return res.status(201).send({ msg: "Product listing created successfully", data: savedListing });
+
+//     } catch (error) {
+//         console.error("Error during product listing creation:", error);
+
+//         // Provide a more user-friendly error message
+//         const errorMessage = error.message || "An unknown error occurred during product listing creation";
+        
+//         // If it's a validation error, return 400 status
+//         if (error.name === "ValidationError") {
+//             return res.status(400).send({ error: errorMessage });
+//         }
+
+//         // For other errors, return a 500 status
+//         return res.status(500).send({ error: errorMessage });
+//     }
+// }
 export async function uploadcreatelisting_product(req, res) {
     try {
         const {
@@ -303,12 +365,19 @@ export async function uploadcreatelisting_product(req, res) {
             additionalinfo
         } = req.body;
 
-        // Validate required fields before proceeding
-        if (!category || !cropyear || !product || !type || !unitofmeasure || !expirydate || !total || !price || !details || !location || !specificationtype || !addspecification || !additionalinfo) {
-            return res.status(400).send({ error: "All fields are required" });
+        // Validate required fields except image
+        // if (!category || !cropyear || !product || !type || !unitofmeasure || !expirydate || !total || !price || !details || !location || !specificationtype || !addspecification || !additionalinfo) {
+        //     return res.status(400).send({ error: "All fields except image are required" });
+        // }
+
+        // Set the image field if a file was uploaded
+        const imagePath = req.file ? req.file.path : null;
+
+        if (!imagePath) {
+            return res.status(400).send({ error: "Image is required" });
         }
 
-        // Create a new product listing document without userId
+        // Create a new product listing document
         const newProductListing = new createlisting_product({
             category,
             cropyear,
@@ -322,7 +391,8 @@ export async function uploadcreatelisting_product(req, res) {
             location,
             specificationtype,
             addspecification,
-            additionalinfo
+            additionalinfo,
+            image: imagePath
         });
 
         // Save the listing to the database
@@ -334,18 +404,16 @@ export async function uploadcreatelisting_product(req, res) {
     } catch (error) {
         console.error("Error during product listing creation:", error);
 
-        // Provide a more user-friendly error message
         const errorMessage = error.message || "An unknown error occurred during product listing creation";
-        
-        // If it's a validation error, return 400 status
+
         if (error.name === "ValidationError") {
             return res.status(400).send({ error: errorMessage });
         }
 
-        // For other errors, return a 500 status
         return res.status(500).send({ error: errorMessage });
     }
 }
+
 
 export const getcreatelisting_products = async (req, res) => {
     try {

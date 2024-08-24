@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
-
+import {upload} from "../middleware/multer.middleware.js";
+import {uploadcreatelisting_product} from "../controllers/appController.js";
 /** import all controllers */
 import * as controller from "../controllers/appController.js";
 import { registerMail } from "../controllers/mailer.js";
@@ -29,9 +30,10 @@ router
   .put(controller.verifyUser, controller.resetPassword); // use to reset password
 
 // Other than login
-router
-  .route("/uploadcreatelisting_product")
-  .post(controller.uploadcreatelisting_product);
+// router
+//   .route("/uploadcreatelisting_product")
+//   .post(controller.uploadcreatelisting_product);
+router.post('/uploadcreatelisting_product', upload.single('image'), uploadcreatelisting_product);
 
   router.route("/getcreatelisting_products").get(controller.getcreatelisting_products);
 

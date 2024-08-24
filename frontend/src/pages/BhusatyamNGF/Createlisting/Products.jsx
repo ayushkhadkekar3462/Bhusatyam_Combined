@@ -532,7 +532,7 @@ function Products() {
 
             <div className="form-group">
               <label>Price</label>
-              <input type="text" name="price" value={formData.price} readOnly />
+              <input type="text" name="price" value={formData.price} onChange={handleInputChange}  required />
             </div>
 
             <div className="form-group">

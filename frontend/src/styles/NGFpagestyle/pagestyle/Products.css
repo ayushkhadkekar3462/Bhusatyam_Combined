@@ -1,0 +1,127 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+    max-width: 1400px;
+    /* border: 2px solid purple; */
+    height: auto;
+    justify-content: space-around;
+    /* background-color: chartreuse; */
+  }
+  
+  .image-upload-section {
+    /* flex: 4 1 200px; */
+    padding: 20px;
+    width: 500px;
+    min-width: 200px;
+    /* border: 2px solid yellow; */
+  }
+  
+  .form-section {
+    /* flex: 1 1 500px; */
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    
+    width:max(50%,600px);
+    /* min-width: 200px; */
+    /* width: 30%; */
+    /* border: 2px solid blue; */
+    min-width:400px;
+    
+  }
+  
+  .image-upload {
+    border: 1px solid #030303;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 80%;
+  }
+  
+  .image-upload span {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+  }
+  
+  .uploaded-image {
+   width: 100%;
+   height: 100%;
+    object-fit:contain;
+    border-radius: 10px;
+    
+  }
+  
+  .remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    /* border: 2px solid red; */
+    margin-left: 20px;
+    width: 270px;
+    
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group select,
+  .form-group input,
+  .form-group textarea {
+    padding: 11px;
+    border-radius: 5px;
+    border: 1px solid #796d6d;
+    border-radius: 20px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .details-textarea {
+    height: 120px;
+  }
+  
+  .submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .pageheader {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  

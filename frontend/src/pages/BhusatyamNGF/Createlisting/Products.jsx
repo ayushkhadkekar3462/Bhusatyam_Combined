@@ -360,94 +360,8 @@
 // export default Products;
 
 import React, { useState } from "react";
-import styled from "styled-components";
 import axios from "axios"; // Import Axios for making HTTP requests
-
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding-top: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const ImageUploadSection = styled.div`
-  flex: 1 1 200px;
-  padding: 20px;
-  min-width: 200px;
-`;
-
-const FormSection = styled.div`
-  flex: 2 1 500px;
-  min-width: 200px;
-`;
-
-const ImageUpload = styled.div`
-  border: 1px dashed #ccc;
-  border-radius: 10px;
-  border: 1px dashed #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 200px;
-  margin-bottom: 20px;
-  position: relative;
-`;
-
-const Button = styled.button`
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 15px;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-`;
-
-const Input = styled.input`
-  width: 70%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-`;
-
-const Select = styled.select`
-  width: 70%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-`;
-
-const ImageCarousel = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SmallImage = styled.div`
-  border: 1px dashed #ccc;
-  height: 60px;
-  width: 60px;
-  margin : 5px
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import "../../../styles/NGFpagestyle/pagestyle/Products.css"; // Import the CSS file for styling
 
 function Products() {
   const [image, setImage] = useState(null);
@@ -508,12 +422,11 @@ function Products() {
 
   return (
     <>
-      <div className="pageheader w-[90vw]">
-        <h1>Products</h1>
-      </div>
-      <Container>
-        <ImageUploadSection>
-          <ImageUpload className="bg-gray-300 hover:bg-white hover:shadow-md cursor-pointer duration-200">
+    <div style={{borderRadius:"10px",boxShadow:"4px -4px 5px  gray"}}>
+      <div className="header-Product">Marketplace</div>
+      <div className="container">
+        <div className="image-upload-section">
+          <div className="image-upload">
             <input
               type="file"
               accept="image/*"
@@ -523,86 +436,80 @@ function Products() {
             />
             <label htmlFor="upload" style={{ cursor: "pointer" }}>
               {!image ? (
-                <span className="hover:scale-105">Upload photo of product</span>
+                <span>Upload photo of product</span>
               ) : (
                 <img
                   src={URL.createObjectURL(image)}
                   alt="Uploaded"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                    aspectRatio: "2/3",
-                  }}
+                  className="uploaded-image"
                 />
               )}
             </label>
-            <Button
-              style={{ position: "absolute", bottom: "10px", right: "10px" }}
+            <button
+              className="remove-button"
               onClick={() => setImage(null)}
-              className="hover:bg-green-500 duration-300 hover:scale-105 rounded"
             >
               Remove
-            </Button>
-          </ImageUpload>
-        </ImageUploadSection>
+            </button>
+          </div>
+        </div>
 
-        <FormSection>
+        <div className="form-section">
           <form onSubmit={handleSubmit}>
-            <FormGroup className="grid place-items-center">
-              <Label>Category</Label>
-              <Select name="category" value={formData.category} onChange={handleInputChange} required>
+            <div className="form-group">
+              <label>Category</label>
+              <select name="category" value={formData.category} onChange={handleInputChange} required>
                 <option value="" disabled>Select Category</option>
                 <option value="Grains">Grains</option>
                 <option value="Hay/Grass">Hay/Grass</option>
                 <option value="Oilseeds">Oilseeds</option>
                 <option value="Pulses">Pulses</option>
                 <option value="Seeds">Seeds</option>
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            {/* Repeat similar FormGroup components for other form fields */}
-            <FormGroup className="grid place-items-center">
-              <Label>Crop Year</Label>
-              <Select name="cropyear" value={formData.cropyear} onChange={handleInputChange} required>
+            {/* Repeat similar form-group components for other form fields */}
+            <div className="form-group">
+              <label>Crop Year</label>
+              <select name="cropyear" value={formData.cropyear} onChange={handleInputChange} required>
                 <option value="" disabled>Select Crop Year</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
                 <option value="2024">2024</option>
                 <option value="2025">2025</option>
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Product</Label>
-              <Select name="product" value={formData.product} onChange={handleInputChange} required>
+            <div className="form-group">
+              <label>Product</label>
+              <select name="product" value={formData.product} onChange={handleInputChange} required>
                 <option value="" disabled>Select Product</option>
                 <option value="Canola">Canola</option>
                 <option value="Flax">Flax</option>
                 <option value="Mustard">Mustard</option>
                 <option value="Soybeans">Soybeans</option>
                 <option value="Sunflower">Sunflower</option>
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Type</Label>
-              <Select name="type" value={formData.type} onChange={handleInputChange} required>
+            <div className="form-group">
+              <label>Type</label>
+              <select name="type" value={formData.type} onChange={handleInputChange} required>
                 <option value="" disabled>Select Type</option>
                 <option value="Brown">Brown</option>
                 <option value="Golden">Golden</option>
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Variety</Label>
-              <Input type="text" name="variety" value={formData.variety} onChange={handleInputChange} placeholder="Enter variety" required />
-            </FormGroup>
+            <div className="form-group">
+              <label>Variety</label>
+              <input type="text" name="variety" value={formData.variety} onChange={handleInputChange} placeholder="Enter variety" required />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Unit of Measure</Label>
-              <Select name="unitofmeasure" value={formData.unitofmeasure} onChange={handleInputChange} required>
+            <div className="form-group">
+              <label>Unit of Measure</label>
+              <select name="unitofmeasure" value={formData.unitofmeasure} onChange={handleInputChange} required>
                 <option value="" disabled>Select Unit of Measure</option>
                 <option value="Bales">Bales</option>
                 <option value="Bushels">Bushels</option>
@@ -610,58 +517,58 @@ function Products() {
                 <option value="LBS">LBS</option>
                 <option value="Metric Tons">Metric Tons</option>
                 <option value="Short Tons(2000lbs)">Short Tons(2000lbs)</option>
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Expires On</Label>
-              <Input type="date" name="expirydate" value={formData.expirydate} onChange={handleInputChange} required />
-            </FormGroup>
+            <div className="form-group">
+              <label>Expires On</label>
+              <input type="date" name="expirydate" value={formData.expirydate} onChange={handleInputChange} required />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Total</Label>
-              <Input type="text" name="total" value={formData.total} onChange={handleInputChange} placeholder="Enter total" required />
-            </FormGroup>
+            <div className="form-group">
+              <label>Total</label>
+              <input type="text" name="total" value={formData.total} onChange={handleInputChange} placeholder="Enter total" required />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Price</Label>
-              <Input type="text" name="price" value={formData.price} readOnly />
-            </FormGroup>
+            <div className="form-group">
+              <label>Price</label>
+              <input type="text" name="price" value={formData.price} readOnly />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Details</Label>
+            <div className="form-group">
+              <label>Details</label>
               <textarea
-                className="unique-textarea"
+                className="details-textarea"
                 name="details"
                 value={formData.details}
                 onChange={handleInputChange}
                 placeholder="Enter additional details for your Production Contract Offer."
                 required
               ></textarea>
-            </FormGroup>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Location</Label>
-              <Input type="text" name="location" value={formData.location} onChange={handleInputChange} placeholder="Enter a location" required />
-            </FormGroup>
+            <div className="form-group">
+              <label>Location</label>
+              <input type="text" name="location" value={formData.location} onChange={handleInputChange} placeholder="Enter a location" required />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Specification Type</Label>
-              <Select name="specificationtype" value={formData.specificationtype} onChange={handleInputChange} required>
+            <div className="form-group">
+              <label>Specification Type</label>
+              <select name="specificationtype" value={formData.specificationtype} onChange={handleInputChange} required>
                 <option value="" disabled>--select one--</option>
                 <option value="Type1">Type 1</option>
                 <option value="Type2">Type 2</option>
                 {/* Add more options as needed */}
-              </Select>
-            </FormGroup>
+              </select>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Add Specification</Label>
-              <Input type="text" name="addspecification" value={formData.addspecification} onChange={handleInputChange} placeholder="Enter URL" required />
-            </FormGroup>
+            <div className="form-group">
+              <label>Add Specification</label>
+              <input type="text" name="addspecification" value={formData.addspecification} onChange={handleInputChange} placeholder="Enter URL" required />
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Label>Additional Information</Label>
+            <div className="form-group">
+              <label>Additional Information</label>
               <textarea
                 name="additionalinfo"
                 value={formData.additionalinfo}
@@ -669,16 +576,18 @@ function Products() {
                 placeholder="Other"
                 required
               ></textarea>
-            </FormGroup>
+            </div>
 
-            <FormGroup className="grid place-items-center">
-              <Button type="submit">Submit</Button>
-            </FormGroup>
+            <div className="form-group">
+              <button className="submit-button" type="submit">Submit</button>
+            </div>
           </form>
-        </FormSection>
-      </Container>
+        </div>
+      </div>
+      </div>
     </>
   );
 }
 
 export default Products;
+

@@ -1,9 +1,10 @@
 import React from 'react';
 import '../../../styles/NGFpagestyle/pagestyle/Dashboard.css';
-import Products from '../../../components/NGFcomp/createlisting/products';
+import Products from '../../../components/NGFcomp/createlistingdashboard/products';
+import ProductDetails from '../../../components/NGFcomp/createlistingdashboard/productsdetails';
 
 
-const Dashboard = () => {
+const Dashboard = ({product}) => {
   return (
     <>
     <div className="dashboard-container1">
@@ -35,7 +36,13 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-    {/* <Products/> */}
+    {/* {product ? (
+        <ProductDetails product={product} />
+      ) : (
+        <div>Loading product details...</div>
+      )} */}
+    {/* <ProductDetails product={product} />  */}
+    <Products/>
     </>
   );
 };

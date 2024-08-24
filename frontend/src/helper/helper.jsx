@@ -126,3 +126,19 @@ export async function resetPassword({ username, password }){
         return Promise.reject({ error })
     }
 }
+
+
+/** product listing logics */
+export const uploadProduct = async (formData) => {
+    try {
+      const response = await axios.post("/api/uploadcreatelisting_product", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error uploading product:", error);
+      throw error;
+    }
+  };

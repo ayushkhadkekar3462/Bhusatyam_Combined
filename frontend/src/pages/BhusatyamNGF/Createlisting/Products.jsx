@@ -424,7 +424,7 @@ function Products() {
     <>
     <div style={{borderRadius:"10px",boxShadow:"4px -4px 5px  gray"}}>
       <div className="header-Product">Marketplace</div>
-      <div className="container">
+      <div className="products-container">
         <div className="image-upload-section">
           <div className="image-upload">
             <input

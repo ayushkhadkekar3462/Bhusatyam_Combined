@@ -3,6 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import connect from './database/conn.js';
 import router from './router/route.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 
@@ -12,9 +14,12 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by'); // less hackers know about our stack
 app.use('/public/temp', express.static('uploads'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const port = 8080;
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 /** HTTP GET Request */
 app.get('/signup', (req, res) => {

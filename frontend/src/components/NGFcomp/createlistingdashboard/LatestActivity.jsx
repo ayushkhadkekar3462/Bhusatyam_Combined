@@ -34,12 +34,16 @@ const LatestActivity = () => {
             </div>
             <div className="activity-badge">
               <span className="badge-text">PRODUCT</span>
-              <span className="activity-time">2 mins ago</span>
+              <span className="activity-time">1 mins ago</span>
             </div>
           </div>
         ))
       ) : (
-        <div>Loading...</div>
+        <div style={{
+          fontSize:"30px",
+          fontFamily:"poppins",
+          color:"red"
+        }}>NO ACTIVITIES YET</div>
       )}
     </div>
   );

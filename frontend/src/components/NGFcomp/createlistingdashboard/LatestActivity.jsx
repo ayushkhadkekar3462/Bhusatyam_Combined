@@ -23,7 +23,7 @@ const LatestActivity = () => {
         products.map((product, index) => (
           <div key={index} className="activity-item">
             <div className="activity-icon">
-              <img src="path_to_icon" alt="Product Icon" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_AMqDpIyRxL2VctHjMZPeJh-Y-A7BDGBPow&s" alt="Product Icon" />
             </div>
             <div className="activity-details">
               <span className="activity-product">{product.product}</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../styles/NGFpagestyle/pagestyle/Dashboard.css';
-import Products from '../../../components/NGFcomp/createlistingdashboard/products';
+import Products from '../../../components/NGFcomp/createlistingdashboard/LatestActivity';
 import ProductDetails from '../../../components/NGFcomp/createlistingdashboard/productsdetails';
 
 
@@ -13,10 +13,11 @@ const Dashboard = ({product}) => {
         <h1>Dashboard</h1>
       </header>
       <div className="dashboard-content1">
-        <div className="activity-section1">
+        {/* <div className="activity-section1">
           <h2>Latest Activity</h2>
           <p>You have no activity.</p>
-        </div>
+        </div> */}
+        <Products/>
         <div className="card-section1">
           <Card
             title="Products Wish List"
@@ -42,7 +43,7 @@ const Dashboard = ({product}) => {
         <div>Loading product details...</div>
       )} */}
     {/* <ProductDetails product={product} />  */}
-    <Products/>
+    {/* <Products/> */}
     </>
   );
 };

@@ -8,6 +8,7 @@ import { BsCartCheck } from "react-icons/bs";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SidebarMenu";
+// import Profile from "../../Authcomp/Profile";
 import "../../../styles/NGFpagestyle/compstyles/sidebar.css";
 const routes = [
   {
@@ -92,31 +93,14 @@ const routes = [
     icon: <BsCartCheck className="size-5 text-black"/>,
   },
   {
-    path: "/settings",
-    name: "Settings",
+    path: "/profile",
+    name: "Profile",
     icon: <BiCog className="size-5 text-black"/>,
     exact: true,
-    subRoutes: [
-      {
-        path: "/settings/profile",
-        name: "Profile ",
-        icon: <FaUser className="size-5 text-black"/>,
-      },
-      {
-        path: "/settings/2fa",
-        name: "2FA",
-        icon: <FaLock className="size-5 text-black"/>,
-      },
-      {
-        path: "/settings/billing",
-        name: "Billing",
-        icon: <FaMoneyBill className="size-5 text-black"/>,
-      },
-    ],
   },
   {
-    path: "/saved",
-    name: "Saved",
+    path: "/",
+    name: "Logout",
     icon: <AiFillHeart className="size-5 text-black"/>,
   },
 ];

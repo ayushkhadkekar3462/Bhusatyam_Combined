@@ -29,11 +29,12 @@ import CProducts from "../pages/BhusatyamNGF/Completedorders/CProducts.jsx";
 // import FileManager from "./pages/BhusatyamNGF/FileManager/FileManager";
 import Support from "../pages/BhusatyamNGF/Support/Support.jsx";
 import Saved from "../pages/BhusatyamNGF/Saved/Saved.jsx";
-import Setting from "../pages/BhusatyamNGF/Setting/Setting.jsx";
+import Setting from "./BhusatyamNGF/Setting/Setting.jsx";
 // import Createlisting from "./pages/BhusatyamNGF/MarketPlace/Createlisting";
 import Layout from '../Layout.jsx';
 import Postproperty from '../components/Landcomp/Postproperty.jsx';
 import FindAgent from '../components/Landcomp/FindAgent.jsx';
+import { ProtectRoute } from './protect/protectroute.jsx';
 
 function Pages() {
   return (
@@ -54,21 +55,30 @@ function Pages() {
 
       {/* Define a parent route for the layout */}
       <Route path="/*" element={<Layout />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="marketplace" element={<Marketplace />} />
-        <Route path="Product" element={<Product />} />
-        <Route path="Productioncontract" element={<Productioncontract />} />
-        <Route path="Productbid" element={<Productbid />} />
-        <Route path="Productbids" element={<Productbids />} />
-        <Route path="Productioncontracts" element={<Productioncontracts />} />
-        <Route path="Products" element={<Products />} />
-        <Route path="CProductbids" element={<CProductbids />} />
-        <Route path="Negotiationitems" element={<Negotiationitems />} />
-        <Route path="CProductioncontracts" element={<CProductioncontracts />} />
-        <Route path="CProducts" element={<CProducts />} />
-        <Route path="Support" element={<Support />} />
-        <Route path="setting" element={<Setting />} />
-        <Route path="*" element={<p>Not Found</p>} />
+        <Route
+          path="*"
+          element={
+            <ProtectRoute>
+              <Routes>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="marketplace" element={<Marketplace />} />
+                <Route path="Product" element={<Product />} />
+                <Route path="Productioncontract" element={<Productioncontract />} />
+                <Route path="Productbid" element={<Productbid />} />
+                <Route path="Productbids" element={<Productbids />} />
+                <Route path="Productioncontracts" element={<Productioncontracts />} />
+                <Route path="Products" element={<Products />} />
+                <Route path="CProductbids" element={<CProductbids />} />
+                <Route path="Negotiationitems" element={<Negotiationitems />} />
+                <Route path="CProductioncontracts" element={<CProductioncontracts />} />
+                <Route path="CProducts" element={<CProducts />} />
+                <Route path="Support" element={<Support />} />
+                <Route path="setting" element={<Setting />} />
+                <Route path="*" element={<p>Not Found</p>} />
+              </Routes>
+            </ProtectRoute>
+          }
+        />
       </Route>
     </Routes>
   </Router>

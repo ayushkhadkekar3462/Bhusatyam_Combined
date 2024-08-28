@@ -360,6 +360,7 @@ export async function uploadcreatelisting_product(req, res) {
             price,
             details,
             location,
+            coordinates, // Added coordinates
             specificationtype,
             addspecification,
             additionalinfo
@@ -389,6 +390,7 @@ export async function uploadcreatelisting_product(req, res) {
             price,
             details,
             location,
+            coordinates: coordinates ? coordinates.split(',').map(Number) : [],
             specificationtype,
             addspecification,
             additionalinfo,

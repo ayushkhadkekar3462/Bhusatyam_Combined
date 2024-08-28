@@ -1,358 +1,231 @@
+
+
 // import React, { useState } from "react";
-// import styled from "styled-components";
-
-// const Container = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 20px;
-//   padding-top: 20px;
-
-//   @media (max-width: 768px) {
-//     flex-direction: column;
-//   }
-// `;
-
-// const ImageUploadSection = styled.div`
-//   flex: 1 1 200px;
-//   padding: 20px;
-//   min-width: 200px;
-// `;
-
-// const FormSection = styled.div`
-//   flex: 2 1 500px;
-//   min-width: 200px;
-// `;
-
-// const ImageUpload = styled.div`
-//   border: 1px dashed #ccc;
-//   border-radius: 10px;
-//   border: 1px dashed #ccc;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   height: 200px;
-//   margin-bottom: 20px;
-//   position: relative;
-// `;
-
-// const Button = styled.button`
-//   background-color: #ff6b6b;
-//   color: white;
-//   border: none;
-//   padding: 5px 10px;
-//   cursor: pointer;
-// `;
-
-// const FormGroup = styled.div`
-//   margin-bottom: 15px;
-// `;
-
-// const Label = styled.label`
-//   display: block;
-//   margin-bottom: 5px;
-//   font-weight: bold;
-// `;
-
-// const Input = styled.input`
-//   width: 70%;
-//   padding: 10px;
-//   box-sizing: border-box;
-//   border: 1px solid #ccc;
-//   border-radius: 10px;
-// `;
-
-// const Select = styled.select`
-//   width: 70%;
-//   padding: 10px;
-//   box-sizing: border-box;
-//   border: 1px solid #ccc;
-//   border-radius: 10px;
-// `;
-
-// const ImageCarousel = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// `;
-
-// const SmallImage = styled.div`
-//   border: 1px dashed #ccc;
-//   height: 60px;
-//   width: 60px;
-//   margin : 5px
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
-// // const  handleImageUpload=()=>{
-// //  document.getElementsByClassName('ImageInputProperty')[0].value = '';
-// // }
+// import axios from "axios"; // Import Axios for making HTTP requests
+// import "../../../styles/NGFpagestyle/pagestyle/Products.css"; // Import the CSS file for styling
 
 // function Products() {
-//   //Logic to ulpoad the image
 //   const [image, setImage] = useState(null);
+//   const [formData, setFormData] = useState({
+//     category: "",
+//     cropyear: "",
+//     product: "",
+//     type: "",
+//     variety: "",
+//     unitofmeasure: "",
+//     expirydate: "",
+//     total: "",
+//     price: "", // Assuming price is not editable as it is set to readOnly
+//     details: "",
+//     location: "",
+//     specificationtype: "",
+//     addspecification: "",
+//     additionalinfo: "",
+//   });
 
 //   const handleImageUpload = (e) => {
 //     const file = e.target.files[0];
 //     if (file) {
-//       setImage(URL.createObjectURL(file));
+//       setImage(file); // Store the file object for later use
 //     }
 //   };
 
-//   const removeImage = () => {
-//     setImage(null);
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: value,
+//     }));
 //   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+    
+//     // Create FormData object to send as multipart/form-data
+//     const data = new FormData();
+//     data.append("image", image);
+//     Object.keys(formData).forEach((key) => {
+//       data.append(key, formData[key]);
+//     });
+
+//     try {
+//       const response = await axios.post("/api/uploadcreatelisting_product", data, {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       });
+//       alert("Product uploaded successfully!");
+//     } catch (error) {
+//       console.error("Error uploading product:", error);
+//       alert("Failed to upload product. Please try again.");
+//     }
+//   };
+
 //   return (
 //     <>
-//       <div className="pageheader w-[90vw]">
-//         <h1>Products</h1>
-//       </div>
-//       <Container>
-//         <ImageUploadSection>
-//           <ImageUpload className=" bg-gray-300 hover:bg-white hover:shadow-md cursor-pointer duration-200 ">
+//     <div style={{borderRadius:"10px",boxShadow:"4px -4px 5px  gray"}}>
+//       <div className="header-Product">Marketplace</div>
+//       <div className="products-container">
+//         <div className="image-upload-section">
+//           <div className="image-upload">
 //             <input
 //               type="file"
 //               accept="image/*"
-//               // position="relative"
 //               style={{ display: "none" }}
 //               id="upload"
 //               onChange={handleImageUpload}
 //             />
 //             <label htmlFor="upload" style={{ cursor: "pointer" }}>
 //               {!image ? (
-//                 <span className="hover:scale-105 ">
-//                   Upload photo of product
-//                 </span>
+//                 <span>Upload photo of product</span>
 //               ) : (
 //                 <img
-//                   src={image}
+//                   src={URL.createObjectURL(image)}
 //                   alt="Uploaded"
-//                   style={{
-//                     width: "100%",
-//                     height: "auto",
-//                     objectFit: "contain",
-//                     aspectRatio: "2/3",
-//                   }}
+//                   className="uploaded-image"
 //                 />
 //               )}
 //             </label>
-//             <Button
-//               style={{ position: "absolute", bottom: "10px", right: "10px" }}
-//               onClick={removeImage}
-//               className="hover:bg-green-500 duration-300 hover:scale-105 rounded"
+//             <button
+//               className="remove-button"
+//               onClick={() => setImage(null)}
 //             >
 //               Remove
-//             </Button>
-//           </ImageUpload>
-//           <ImageCarousel>
-//             <SmallImage className="grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer">
-//               +
-//             </SmallImage>
-//             <SmallImage className="grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer">
-//               +
-//             </SmallImage>
-//             <SmallImage className="grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer">
-//               +
-//             </SmallImage>
-//             <SmallImage className="grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer">
-//               +
-//             </SmallImage>
-//             <SmallImage className="grid place-items-center bg-gray-300 hover:bg-white hover:scale-105 duration-200 cursor-pointer">
-//               +
-//             </SmallImage>
-//           </ImageCarousel>
-//         </ImageUploadSection>
+//             </button>
+//           </div>
+//         </div>
 
-//         <FormSection>
-//           <FormGroup className="grid place-items-center">
-//             <Label>Category</Label>
-
-//             <Select defaultValue="">
-//               <option value="" disabled>
-//                 Select Category
-//               </option>
-//               <option value="Grains">Grains</option>
-//               <option value="Hay/Grass">Hay/Grass</option>
-//               <option value="Oilseeds">Oilseeds</option>
-//               <option value="Pulses">Pulses</option>
-//               <option value="Seeds">Seeds</option>
-//             </Select>
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Crop year</Label>
-//             <Select defaultValue="">
-//               <option value="" disabled>
-//                 Select Cropyear
-//               </option>
-//               <option value="">2021</option>
-//               <option value="">2022</option>
-//               <option value="">2023</option>
-//               <option value="">2024</option>
-//               <option value="">2025</option>
-//             </Select>
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Product</Label>
-//             <Select defaultValue="">
-//               <option value="" disabled>
-//                 Select Product
-//               </option>
-//               <option value="">Canola</option>
-//               <option value="">Flax</option>
-//               <option value="">Mustard</option>
-//               <option value="">Soyabeans</option>
-//               <option value="">Sunflower</option>
-//             </Select>
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Type</Label>
-//             <Select defaultValue="">
-//               <option value="" disabled>
-//                 Select Type
-//               </option>
-//               <option value="">Brown</option>
-//               <option value="">Golden</option>
-//             </Select>
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Variety</Label>
-//             <Input type="text" placeholder="Enter variety" />
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Unit of Measure</Label>
-//             <Select defaultValue="">
-//               <option value="" disabled>
-//                 Select Unit of measure
-//               </option>
-//               <option value="">Bales</option>
-//               <option value="">Bushels</option>
-//               <option value="">CWt (100lbs)</option>
-//               <option value="">LBS</option>
-//               <option value="">Metric Tons</option>
-//               <option value="">Short Tons(2000lbs)</option>
-//             </Select>
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Expires On</Label>
-//             <Input type="date" />
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Total</Label>
-//             <Input type="text" placeholder="Enter total" />
-//           </FormGroup>
-
-//           <FormGroup className="grid place-items-center">
-//             <Label>Price</Label>
-//             <Input type="text" value="0" readOnly />
-//           </FormGroup>
-//           <FormGroup className="grid place-items-center">
-//             <div className="w-[70%] ">
-//               <div className="unique-details-section">
-//                 <h3 className="unique-section-title">Details</h3>
-//                 <div className="unique-form-group details-group">
-//                   <label className="unique-label">Include more details</label>
-//                   <textarea
-//                     className="unique-textarea"
-//                     placeholder="Enter additional details for your Production Contract Offer."
-//                   ></textarea>
-//                 </div>
-//               </div>
-
-//               {/* New "Location" Section */}
-//               <div className="unique-location-section">
-//                 <h3 className="unique-section-title">Location</h3>
-//                 <div className="unique-location-info">
-//                   The requested address will be used for Production Contract
-//                   Offer location purposes. The precise location will not be
-//                   shared with the Farmer; however, the general location will be
-//                   shared.
-//                 </div>
-//                 <div className="unique-form-group location-group">
-//                   <label className="unique-label">
-//                     Where is your Production Contract located?
-//                   </label>
-//                   <input
-//                     className="unique-input"
-//                     type="text"
-//                     placeholder="Enter a location"
-//                   />
-//                 </div>
-//                 <button className="unique-button">Set Location</button>
-//               </div>
-//               <div className="form-section1">
-//                 <h2>Certifications</h2>
-//                 <div className="certifications-group1">
-//                   <button type="button" className="add-certification-btn1">
-//                     Add Required Certification
-//                   </button>
-//                   <div className="form-group1">
-//                     <label>Specification Type</label>
-//                     <select name="specificationType">
-//                       <option value="">--select one--</option>
-//                     </select>
-//                   </div>
-//                   <div className="form-group1">
-//                     <label>Add Specification</label>
-//                     <div className="specification-inputs1">
-//                       <input
-//                         type="text"
-//                         name="specificationUrl"
-//                         placeholder="Enter URL"
-//                       />
-//                       <span>or</span>
-//                       <button type="button" className="upload-btn">
-//                         Upload Document
-//                       </button>
-//                     </div>
-//                   </div>
-//                   <div className="form-group1">
-//                     <label>Additional Information</label>
-//                     <textarea
-//                       name="additionalInfo"
-//                       placeholder="Other"
-//                     ></textarea>
-//                   </div>
-//                   <button type="button" className="add-btn1">
-//                     + Add
-//                   </button>
-//                 </div>
-//               </div>
-//               <div className="form-section1 policy-section1">
-//                 <div className="policy-info1">
-//                   <p>
-//                     By proceeding, you acknowledge reading and agreeing to
-//                     NGF-Global's policies{" "}
-//                     <a
-//                       href="https://www.ngf-global.com/policy"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                     >
-//                       https://www.ngf-global.com/policy
-//                     </a>
-//                   </p>
-//                 </div>
-//               </div>
-//               <div className="form-actions1">
-//                 <button type="button" className="cancel-btn1">
-//                   Cancel
-//                 </button>
-//                 <button type="submit" className="submit-btn1">
-//                   Submit
-//                 </button>
-//               </div>
+//         <div className="form-section">
+//           <form onSubmit={handleSubmit}>
+//             <div className="form-group">
+//               <label>Category</label>
+//               <select name="category" value={formData.category} onChange={handleInputChange} required>
+//                 <option value="" disabled>Select Category</option>
+//                 <option value="Grains">Grains</option>
+//                 <option value="Hay/Grass">Hay/Grass</option>
+//                 <option value="Oilseeds">Oilseeds</option>
+//                 <option value="Pulses">Pulses</option>
+//                 <option value="Seeds">Seeds</option>
+//               </select>
 //             </div>
-//           </FormGroup>
-//         </FormSection>
-//       </Container>
+
+//             {/* Repeat similar form-group components for other form fields */}
+//             <div className="form-group">
+//               <label>Crop Year</label>
+//               <select name="cropyear" value={formData.cropyear} onChange={handleInputChange} required>
+//                 <option value="" disabled>Select Crop Year</option>
+//                 <option value="2021">2021</option>
+//                 <option value="2022">2022</option>
+//                 <option value="2023">2023</option>
+//                 <option value="2024">2024</option>
+//                 <option value="2025">2025</option>
+//               </select>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Product</label>
+//               <select name="product" value={formData.product} onChange={handleInputChange} required>
+//                 <option value="" disabled>Select Product</option>
+//                 <option value="Canola">Canola</option>
+//                 <option value="Flax">Flax</option>
+//                 <option value="Mustard">Mustard</option>
+//                 <option value="Soybeans">Soybeans</option>
+//                 <option value="Sunflower">Sunflower</option>
+//               </select>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Type</label>
+//               <select name="type" value={formData.type} onChange={handleInputChange} required>
+//                 <option value="" disabled>Select Type</option>
+//                 <option value="Brown">Brown</option>
+//                 <option value="Golden">Golden</option>
+//               </select>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Variety</label>
+//               <input type="text" name="variety" value={formData.variety} onChange={handleInputChange} placeholder="Enter variety" required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Unit of Measure</label>
+//               <select name="unitofmeasure" value={formData.unitofmeasure} onChange={handleInputChange} required>
+//                 <option value="" disabled>Select Unit of Measure</option>
+//                 <option value="Bales">Bales</option>
+//                 <option value="Bushels">Bushels</option>
+//                 <option value="CWt (100lbs)">CWt (100lbs)</option>
+//                 <option value="LBS">LBS</option>
+//                 <option value="Metric Tons">Metric Tons</option>
+//                 <option value="Short Tons(2000lbs)">Short Tons(2000lbs)</option>
+//               </select>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Expires On</label>
+//               <input type="date" name="expirydate" value={formData.expirydate} onChange={handleInputChange} required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Total</label>
+//               <input type="text" name="total" value={formData.total} onChange={handleInputChange} placeholder="Enter total" required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Price</label>
+//               <input type="text" name="price" value={formData.price} onChange={handleInputChange}  required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Details</label>
+//               <textarea
+//                 className="details-textarea"
+//                 name="details"
+//                 value={formData.details}
+//                 onChange={handleInputChange}
+//                 placeholder="Enter additional details for your Production Contract Offer."
+//                 required
+//               ></textarea>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Location</label>
+//               <input type="text" name="location" value={formData.location} onChange={handleInputChange} placeholder="Enter a location" required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Specification Type</label>
+//               <select name="specificationtype" value={formData.specificationtype} onChange={handleInputChange} required>
+//                 <option value="" disabled>--select one--</option>
+//                 <option value="Type1">Type 1</option>
+//                 <option value="Type2">Type 2</option>
+//                 {/* Add more options as needed */}
+//               </select>
+//             </div>
+
+//             <div className="form-group">
+//               <label>Add Specification</label>
+//               <input type="text" name="addspecification" value={formData.addspecification} onChange={handleInputChange} placeholder="Enter URL" required />
+//             </div>
+
+//             <div className="form-group">
+//               <label>Additional Information</label>
+//               <textarea
+//                 name="additionalinfo"
+//                 value={formData.additionalinfo}
+//                 onChange={handleInputChange}
+//                 placeholder="Other"
+//                 required
+//               ></textarea>
+//             </div>
+
+//             <div className="form-group">
+//               <button className="submit-button" type="submit">Submit</button>
+//             </div>
+//           </form>
+//         </div>
+//       </div>
+//       </div>
 //     </>
 //   );
 // }
@@ -360,8 +233,8 @@
 // export default Products;
 
 import React, { useState } from "react";
-import axios from "axios"; // Import Axios for making HTTP requests
-import "../../../styles/NGFpagestyle/pagestyle/Products.css"; // Import the CSS file for styling
+import axios from "axios";
+import "../../../styles/NGFpagestyle/pagestyle/Products.css";
 
 function Products() {
   const [image, setImage] = useState(null);
@@ -374,18 +247,19 @@ function Products() {
     unitofmeasure: "",
     expirydate: "",
     total: "",
-    price: "0", // Assuming price is not editable as it is set to readOnly
+    price: "",
     details: "",
     location: "",
     specificationtype: "",
     addspecification: "",
     additionalinfo: "",
+    coordinates: null, // Added for storing coordinates
   });
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file); // Store the file object for later use
+      setImage(file);
     }
   };
 
@@ -397,16 +271,50 @@ function Products() {
     }));
   };
 
+  const getCoordinates = async (location) => {
+    const mapboxToken = "pk.eyJ1IjoiYXl1c2hraGFka2VrYXIiLCJhIjoiY2x6ZWY0dzR2MG9zcTJxcXE5dWQ4czA5ZSJ9.4VTm_Sy8KPMq6lY9-jatJA"; // Replace with your Mapbox token
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+      location
+    )}.json?access_token=${mapboxToken}`;
+  
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
+      if (data.features.length > 0) {
+        const coordinates = data.features[0].center; // [longitude, latitude]
+        return coordinates; // Returning the array directly
+      } else {
+        console.error("No location found");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+      return null;
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create FormData object to send as multipart/form-data
+  
+    const coordinates = await getCoordinates(formData.location);
+    // console.log(coordinates);
+    if (!coordinates) {
+      alert("Failed to get coordinates. Please check the location.");
+      return;
+    }
+  
+    // Update formData with coordinates (array)
+    const updatedFormData = {
+      ...formData,
+      coordinates, // This will store the [longitude, latitude] array
+    };
+  
     const data = new FormData();
     data.append("image", image);
-    Object.keys(formData).forEach((key) => {
-      data.append(key, formData[key]);
+    Object.keys(updatedFormData).forEach((key) => {
+      data.append(key, updatedFormData[key]);
     });
-
+  
     try {
       const response = await axios.post("/api/uploadcreatelisting_product", data, {
         headers: {
@@ -422,172 +330,256 @@ function Products() {
 
   return (
     <>
-    <div style={{borderRadius:"10px",boxShadow:"4px -4px 5px  gray"}}>
-      <div className="header-Product">Marketplace</div>
-      <div className="products-container">
-        <div className="image-upload-section">
-          <div className="image-upload">
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              id="upload"
-              onChange={handleImageUpload}
-            />
-            <label htmlFor="upload" style={{ cursor: "pointer" }}>
-              {!image ? (
-                <span>Upload photo of product</span>
-              ) : (
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt="Uploaded"
-                  className="uploaded-image"
+      <div style={{ borderRadius: "10px", boxShadow: "4px -4px 5px gray" }}>
+        <div className="header-Product">Marketplace</div>
+        <div className="products-container">
+          <div className="image-upload-section">
+            <div className="image-upload">
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                id="upload"
+                onChange={handleImageUpload}
+              />
+              <label htmlFor="upload" style={{ cursor: "pointer" }}>
+                {!image ? (
+                  <span>Upload photo of product</span>
+                ) : (
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt="Uploaded"
+                    className="uploaded-image"
+                  />
+                )}
+              </label>
+              <button
+                className="remove-button"
+                onClick={() => setImage(null)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <div className="form-section">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Category</label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Category
+                  </option>
+                  <option value="Grains">Grains</option>
+                  <option value="Hay/Grass">Hay/Grass</option>
+                  <option value="Oilseeds">Oilseeds</option>
+                  <option value="Pulses">Pulses</option>
+                  <option value="Seeds">Seeds</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Crop Year</label>
+                <select
+                  name="cropyear"
+                  value={formData.cropyear}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Crop Year
+                  </option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Product</label>
+                <select
+                  name="product"
+                  value={formData.product}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Product
+                  </option>
+                  <option value="Canola">Canola</option>
+                  <option value="Flax">Flax</option>
+                  <option value="Mustard">Mustard</option>
+                  <option value="Soybeans">Soybeans</option>
+                  <option value="Sunflower">Sunflower</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Type</label>
+                <select
+                  name="type"
+                  value={formData.type}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Type
+                  </option>
+                  <option value="Brown">Brown</option>
+                  <option value="Golden">Golden</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Variety</label>
+                <input
+                  type="text"
+                  name="variety"
+                  value={formData.variety}
+                  onChange={handleInputChange}
+                  placeholder="Enter variety"
+                  required
                 />
-              )}
-            </label>
-            <button
-              className="remove-button"
-              onClick={() => setImage(null)}
-            >
-              Remove
-            </button>
+              </div>
+
+              <div className="form-group">
+                <label>Unit of Measure</label>
+                <select
+                  name="unitofmeasure"
+                  value={formData.unitofmeasure}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Unit of Measure
+                  </option>
+                  <option value="Bales">Bales</option>
+                  <option value="Bushels">Bushels</option>
+                  <option value="CWt (100lbs)">CWt (100lbs)</option>
+                  <option value="LBS">LBS</option>
+                  <option value="Metric Tons">Metric Tons</option>
+                  <option value="Short Tons(2000lbs)">Short Tons(2000lbs)</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Expires On</label>
+                <input
+                  type="date"
+                  name="expirydate"
+                  value={formData.expirydate}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Total</label>
+                <input
+                  type="text"
+                  name="total"
+                  value={formData.total}
+                  onChange={handleInputChange}
+                  placeholder="Enter total"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Price</label>
+                <input
+                  type="text"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Details</label>
+                <textarea
+                  className="details-textarea"
+                  name="details"
+                  value={formData.details}
+                  onChange={handleInputChange}
+                  placeholder="Enter additional details for your Production Contract Offer."
+                  required
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <label>Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  placeholder="Enter a location"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Specification Type</label>
+                <select
+                  name="specificationtype"
+                  value={formData.specificationtype}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="" disabled>
+                    --select one--
+                  </option>
+                  <option value="Type1">Type 1</option>
+                  <option value="Type2">Type 2</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Add Specification</label>
+                <input
+                  type="text"
+                  name="addspecification"
+                  value={formData.addspecification}
+                  onChange={handleInputChange}
+                  placeholder="Enter URL"
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Additional Information</label>
+                <textarea
+                  name="additionalinfo"
+                  value={formData.additionalinfo}
+                  onChange={handleInputChange}
+                  placeholder="Other"
+                  required
+                ></textarea>
+              </div>
+
+              <div className="form-group">
+                <button className="submit-button" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div className="form-section">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Category</label>
-              <select name="category" value={formData.category} onChange={handleInputChange} required>
-                <option value="" disabled>Select Category</option>
-                <option value="Grains">Grains</option>
-                <option value="Hay/Grass">Hay/Grass</option>
-                <option value="Oilseeds">Oilseeds</option>
-                <option value="Pulses">Pulses</option>
-                <option value="Seeds">Seeds</option>
-              </select>
-            </div>
-
-            {/* Repeat similar form-group components for other form fields */}
-            <div className="form-group">
-              <label>Crop Year</label>
-              <select name="cropyear" value={formData.cropyear} onChange={handleInputChange} required>
-                <option value="" disabled>Select Crop Year</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Product</label>
-              <select name="product" value={formData.product} onChange={handleInputChange} required>
-                <option value="" disabled>Select Product</option>
-                <option value="Canola">Canola</option>
-                <option value="Flax">Flax</option>
-                <option value="Mustard">Mustard</option>
-                <option value="Soybeans">Soybeans</option>
-                <option value="Sunflower">Sunflower</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Type</label>
-              <select name="type" value={formData.type} onChange={handleInputChange} required>
-                <option value="" disabled>Select Type</option>
-                <option value="Brown">Brown</option>
-                <option value="Golden">Golden</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Variety</label>
-              <input type="text" name="variety" value={formData.variety} onChange={handleInputChange} placeholder="Enter variety" required />
-            </div>
-
-            <div className="form-group">
-              <label>Unit of Measure</label>
-              <select name="unitofmeasure" value={formData.unitofmeasure} onChange={handleInputChange} required>
-                <option value="" disabled>Select Unit of Measure</option>
-                <option value="Bales">Bales</option>
-                <option value="Bushels">Bushels</option>
-                <option value="CWt (100lbs)">CWt (100lbs)</option>
-                <option value="LBS">LBS</option>
-                <option value="Metric Tons">Metric Tons</option>
-                <option value="Short Tons(2000lbs)">Short Tons(2000lbs)</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Expires On</label>
-              <input type="date" name="expirydate" value={formData.expirydate} onChange={handleInputChange} required />
-            </div>
-
-            <div className="form-group">
-              <label>Total</label>
-              <input type="text" name="total" value={formData.total} onChange={handleInputChange} placeholder="Enter total" required />
-            </div>
-
-            <div className="form-group">
-              <label>Price</label>
-              <input type="text" name="price" value={formData.price} onChange={handleInputChange}  required />
-            </div>
-
-            <div className="form-group">
-              <label>Details</label>
-              <textarea
-                className="details-textarea"
-                name="details"
-                value={formData.details}
-                onChange={handleInputChange}
-                placeholder="Enter additional details for your Production Contract Offer."
-                required
-              ></textarea>
-            </div>
-
-            <div className="form-group">
-              <label>Location</label>
-              <input type="text" name="location" value={formData.location} onChange={handleInputChange} placeholder="Enter a location" required />
-            </div>
-
-            <div className="form-group">
-              <label>Specification Type</label>
-              <select name="specificationtype" value={formData.specificationtype} onChange={handleInputChange} required>
-                <option value="" disabled>--select one--</option>
-                <option value="Type1">Type 1</option>
-                <option value="Type2">Type 2</option>
-                {/* Add more options as needed */}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Add Specification</label>
-              <input type="text" name="addspecification" value={formData.addspecification} onChange={handleInputChange} placeholder="Enter URL" required />
-            </div>
-
-            <div className="form-group">
-              <label>Additional Information</label>
-              <textarea
-                name="additionalinfo"
-                value={formData.additionalinfo}
-                onChange={handleInputChange}
-                placeholder="Other"
-                required
-              ></textarea>
-            </div>
-
-            <div className="form-group">
-              <button className="submit-button" type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
       </div>
     </>
   );
 }
 
 export default Products;
+
 

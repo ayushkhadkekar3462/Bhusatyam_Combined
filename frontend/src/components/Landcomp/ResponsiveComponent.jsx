@@ -30,13 +30,11 @@ const CardsSection = styled.div`
   background-color: #e3eae6;
   padding: 20px;
   box-sizing: border-box;
-    display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-   gap:10px;600px;
-   max-width:;
-   `
-;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
 
 const ResponsiveComponent = () => {
   const [properties, setProperties] = useState([]);
@@ -57,7 +55,7 @@ const ResponsiveComponent = () => {
       <Header />
       <Container className="page2">
         <MapSection className="map-section">
-          <Map />
+          <Map properties={properties} /> {/* Pass properties to Map component */}
         </MapSection>
         <CardsSection className="page2">
           {properties.length > 0 ? properties.map((property, index) => {

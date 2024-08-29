@@ -390,7 +390,7 @@ export async function uploadcreatelisting_product(req, res) {
             price,
             details,
             location,
-            coordinates: coordinates ? coordinates.split(',').map(Number) : [],
+            coordinates: coordinates ? coordinates.split(',').map(Number) : [0,0],
             specificationtype,
             addspecification,
             additionalinfo,

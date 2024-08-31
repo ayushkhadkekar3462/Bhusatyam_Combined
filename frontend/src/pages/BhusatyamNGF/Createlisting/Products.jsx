@@ -413,11 +413,11 @@ function Products() {
                   <option value="" disabled>
                     Select Product
                   </option>
-                  <option value="Canola">Canola</option>
-                  <option value="Flax">Flax</option>
-                  <option value="Mustard">Mustard</option>
-                  <option value="Soybeans">Soybeans</option>
-                  <option value="Sunflower">Sunflower</option>
+                  <option value="Jute">Jute</option>
+                  <option value="Maize">Maize</option>
+                  <option value="Rice">Rice</option>
+                  <option value="Sugarcane">Sugarcane</option>
+                  <option value="Wheat">Wheat</option>
                 </select>
               </div>
 

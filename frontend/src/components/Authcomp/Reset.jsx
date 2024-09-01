@@ -7,7 +7,7 @@ import { useAuthStore } from '../../store/store';
 import { useNavigate, Navigate } from 'react-router-dom';
 import useFetch from '../../hooks/fetch.hook'
 
-import styles from '../../styles/Authstyles/Username.module.css';
+import styles from '../../styles/Authstyles/Reset.module.css';
 
 export default function Reset() {
 
@@ -17,8 +17,8 @@ export default function Reset() {
 
   const formik = useFormik({
     initialValues : {
-      password : 'admin@123',
-      confirm_pwd: 'admin@123'
+      password : '',
+      confirm_pwd: ''
     },
     validate : resetPasswordValidation,
     validateOnBlur: false,
@@ -53,15 +53,15 @@ export default function Reset() {
 
           <div className="title flex flex-col items-center">
             <h4 className='text-5xl font-bold'>Reset</h4>
-            <span className='py-4 text-xl w-2/3 text-center text-gray-500'>
+            <span className='py-6 text-xl w-3/3 text-center text-gray-500'>
               Enter new password.
             </span>
           </div>
 
-          <form className='py-20' onSubmit={formik.handleSubmit}>
+          <form className='py-4' onSubmit={formik.handleSubmit}>
               <div className="textbox flex flex-col items-center gap-6">
-                  <input {...formik.getFieldProps('password')} className={styles.textbox} type="text" placeholder='New Password' />
-                  <input {...formik.getFieldProps('confirm_pwd')} className={styles.textbox} type="text" placeholder='Repeat Password' />
+                  <input {...formik.getFieldProps('password')} className={styles.textbox} type="text" placeholder='Enter Password' />
+                  <input {...formik.getFieldProps('confirm_pwd')} className={styles.textbox} type="text" placeholder='Confirm Password' />
                   <button className={styles.btn} type='submit'>Reset</button>
               </div>
 

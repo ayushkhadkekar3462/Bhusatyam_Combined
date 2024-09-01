@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuthStore } from  '../../store/store'
-import styles from '../../styles/Authstyles/Username.module.css';
+import styles from '../../styles/Authstyles/Recovery.module.css';
 import { generateOTP, verifyOTP } from '../../helper/helper';
 import { useNavigate } from 'react-router-dom'
 
@@ -66,9 +66,9 @@ export default function Recovery() {
             </span>
           </div>
 
-          <form className='pt-20' onSubmit={onSubmit}>
+          <form className='pt-4' onSubmit={onSubmit}>
 
-              <div className="textbox flex flex-col items-center gap-6">
+              <div className="textbox flex flex-col items-center gap-0">
 
                   <div className="input text-center">
                     <span className='py-4 text-sm text-left text-gray-500'>

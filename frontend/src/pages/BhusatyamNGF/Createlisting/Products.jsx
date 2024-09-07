@@ -545,7 +545,7 @@ function Products() {
                   name="coordinates"
                   value={formData.coordinates.join(", ")}
                   onChange={handleInputChange}
-                  placeholder="Enter coordinates as [longitude, latitude]"
+                  placeholder="Enter coordinates as 'longitude, latitude'"
                   required
                 />
               </div>

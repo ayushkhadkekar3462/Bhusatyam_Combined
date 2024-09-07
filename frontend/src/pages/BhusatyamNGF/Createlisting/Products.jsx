@@ -253,7 +253,7 @@ function Products() {
     specificationtype: "",
     addspecification: "",
     additionalinfo: "",
-    coordinates: null, // Added for storing coordinates
+    coordinates: [], // Changed to an array
   });
 
   const handleImageUpload = (e) => {
@@ -265,56 +265,34 @@ function Products() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    // If the input name is 'coordinates', convert the value to an array
+    if (name === "coordinates") {
+      const coordsArray = value
+        .replace(/[\[\]\s]/g, "") // Remove brackets and whitespace
+        .split(",")
+        .map(Number); // Convert the string values to numbers
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: coordsArray,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const getCoordinates = async (location) => {
-    const mapboxToken = "pk.eyJ1IjoiYXl1c2hraGFka2VrYXIiLCJhIjoiY2x6ZWY0dzR2MG9zcTJxcXE5dWQ4czA5ZSJ9.4VTm_Sy8KPMq6lY9-jatJA"; // Replace with your Mapbox token
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-      location
-    )}.json?access_token=${mapboxToken}`;
-  
-    try {
-      const response = await axios.get(url);
-      const data = response.data;
-      if (data.features.length > 0) {
-        const coordinates = data.features[0].center; // [longitude, latitude]
-        return coordinates; // Returning the array directly
-      } else {
-        console.error("No location found");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error fetching coordinates:", error);
-      return null;
-    }
-  };
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const coordinates = await getCoordinates(formData.location);
-    // console.log(coordinates);
-    if (!coordinates) {
-      alert("Failed to get coordinates. Please check the location.");
-      return;
-    }
-  
-    // Update formData with coordinates (array)
-    const updatedFormData = {
-      ...formData,
-      coordinates, // This will store the [longitude, latitude] array
-    };
-  
+
     const data = new FormData();
     data.append("image", image);
-    Object.keys(updatedFormData).forEach((key) => {
-      data.append(key, updatedFormData[key]);
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
     });
-  
+
     try {
       const response = await axios.post("/api/uploadcreatelisting_product", data, {
         headers: {
@@ -444,7 +422,6 @@ function Products() {
                   name="variety"
                   value={formData.variety}
                   onChange={handleInputChange}
-                  placeholder="Enter variety"
                   required
                 />
               </div>
@@ -470,7 +447,7 @@ function Products() {
               </div>
 
               <div className="form-group">
-                <label>Expires On</label>
+                <label>Expiry Date</label>
                 <input
                   type="date"
                   name="expirydate"
@@ -483,11 +460,10 @@ function Products() {
               <div className="form-group">
                 <label>Total</label>
                 <input
-                  type="text"
+                  type="number"
                   name="total"
                   value={formData.total}
                   onChange={handleInputChange}
-                  placeholder="Enter total"
                   required
                 />
               </div>
@@ -495,7 +471,7 @@ function Products() {
               <div className="form-group">
                 <label>Price</label>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
@@ -506,13 +482,11 @@ function Products() {
               <div className="form-group">
                 <label>Details</label>
                 <textarea
-                  className="details-textarea"
                   name="details"
                   value={formData.details}
                   onChange={handleInputChange}
-                  placeholder="Enter additional details for your Production Contract Offer."
                   required
-                ></textarea>
+                />
               </div>
 
               <div className="form-group">
@@ -522,7 +496,6 @@ function Products() {
                   name="location"
                   value={formData.location}
                   onChange={handleInputChange}
-                  placeholder="Enter a location"
                   required
                 />
               </div>
@@ -551,20 +524,30 @@ function Products() {
                   name="addspecification"
                   value={formData.addspecification}
                   onChange={handleInputChange}
-                  placeholder="Enter URL"
                   required
                 />
               </div>
 
               <div className="form-group">
-                <label>Additional Information</label>
+                <label>Additional Info</label>
                 <textarea
                   name="additionalinfo"
                   value={formData.additionalinfo}
                   onChange={handleInputChange}
-                  placeholder="Other"
                   required
-                ></textarea>
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Coordinates</label>
+                <input
+                  type="character"
+                  name="coordinates"
+                  value={formData.coordinates.join(", ")}
+                  onChange={handleInputChange}
+                  placeholder="Enter coordinates as [longitude, latitude]"
+                  required
+                />
               </div>
 
               <div className="form-group">
@@ -581,5 +564,7 @@ function Products() {
 }
 
 export default Products;
+
+
 
 

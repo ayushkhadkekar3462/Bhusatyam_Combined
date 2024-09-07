@@ -137,7 +137,8 @@
 
 // export default Map;
 
-//New code 
+//New code
+
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -158,8 +159,7 @@ const Map = () => {
   const { lat: selectedLat, lng: selectedLng } = location.state || {};
   const [properties, setProperties] = useState([]);
 
-
-
+  // Fetch the product listing data
   useEffect(() => {
     axios
       .get('http://localhost:8080/api/getcreatelisting_products') // Adjust the URL based on your server setup
@@ -172,6 +172,7 @@ const Map = () => {
       });
   }, []);
 
+  // Initialize the map
   useEffect(() => {
     if (map.current) return; // Initialize map only once
     map.current = new mapboxgl.Map({
@@ -193,15 +194,21 @@ const Map = () => {
     }
   }, [lng, lat, zoom, selectedLat, selectedLng]);
 
+  // Add markers to the map
   useEffect(() => {
     if (!map.current || properties.length === 0) return;
 
     properties.forEach((item) => {
-      const coordinates = Array.isArray(item.coordinates)
-        ? item.coordinates
-        : [item.coordinates?.lng ?? 0, item.coordinates?.lat ?? 0]; // Default to [0, 0] if coordinates are null or undefined
-      
-      if (coordinates.length === 2 && coordinates.every(coord => typeof coord === 'number')) {
+      let coordinates = [];
+
+      // Validate and set coordinates
+      if (Array.isArray(item.coordinates) && item.coordinates.length === 2) {
+        // Ensure both values in the array are numbers
+        coordinates = item.coordinates.map((coord) => Number(coord));
+      }
+
+      // If coordinates are valid, render the marker
+      if (coordinates.length === 2 && coordinates.every(coord => !isNaN(coord))) {
         const el = document.createElement('div');
         el.className = 'marker';
         el.innerHTML = '<img class="markerimg" src="https://png.pngtree.com/png-vector/20201109/ourmid/pngtree-vector-location-icon-png-image_2413694.jpg" />';
@@ -213,10 +220,8 @@ const Map = () => {
           const imageUrl = encodeURI(`http://localhost:8080/${item.image.trim()}`);
 
           const newPopup = new mapboxgl.Popup()
-          
             .setLngLat(coordinates)
             .setHTML(`
-              
               <div class="popup-card">
                 <div class="popup-image" style="background-image: url('${imageUrl.replace('%5C','/').replace('%20C','C')}');"></div>
                 <div class="popup-content">
@@ -239,10 +244,11 @@ const Map = () => {
           .setLngLat(coordinates)
           .addTo(map.current);
       } else {
-        console.warn('Invalid coordinates:', coordinates);
+        console.warn('Invalid coordinates:', item.coordinates);
       }
     });
 
+    // Close popups when clicking outside
     const handleMapClick = () => {
       if (currentPopup) {
         currentPopup.remove();
@@ -277,3 +283,4 @@ const Map = () => {
 };
 
 export default Map;
+

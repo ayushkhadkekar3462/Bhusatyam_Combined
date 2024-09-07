@@ -82,6 +82,11 @@
     width: 270px;
     
   }
+  @media (max-width: 409px) {
+    .form-group {
+        width: 210px;
+    }
+  }
   
   .form-group label {
     margin-bottom: 5px;
@@ -99,7 +104,7 @@
   
   .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    /* min-height: 10px; */
   }
   
   .details-textarea {
@@ -114,6 +119,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 30px;
   }
   
   .submit-button:hover {

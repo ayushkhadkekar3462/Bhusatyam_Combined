@@ -11,7 +11,7 @@ const DetailedProduct = () => {
   return (
     <div className="a-product-details-container">
       <div className="a-product-header">
-        <button className="a-back-button" onClick={() => navigate(-1)}>← Back</button>
+        {/* <button className="a-back-button" onClick={() => navigate(-1)}>← Back</button> */}
         <h1>{product?.product || "a-Product Name"}</h1>
         <p>{product?.category || "a-Category"}</p>
         <p className="a-product-id">ID: {product?._id || "ID not available"}</p>

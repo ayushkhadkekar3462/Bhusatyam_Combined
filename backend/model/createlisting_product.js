@@ -55,6 +55,22 @@ export const createlisting_productSchema = new mongoose.Schema({
         type: [Number], // Array of numbers for [longitude, latitude]
         required: [false, "Please provide coordinates"],
     },
+    blcoordinates: {
+        type: [Number], // Array of numbers for [longitude, latitude]
+        required: [false, "Please provide coordinates"],
+    },
+    brcoordinates: {
+        type: [Number], // Array of numbers for [longitude, latitude]
+        required: [false, "Please provide coordinates"],
+    },
+    trcoordinates: {
+        type: [Number], // Array of numbers for [longitude, latitude]
+        required: [false, "Please provide coordinates"],
+    },
+    tlcoordinates: {
+        type: [Number], // Array of numbers for [longitude, latitude]
+        required: [false, "Please provide coordinates"],
+    },
     specificationtype: {
         type: String,
         required: [false, "Please provide specificationtype"],

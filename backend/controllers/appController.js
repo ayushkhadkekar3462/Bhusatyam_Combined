@@ -361,6 +361,10 @@ export async function uploadcreatelisting_product(req, res) {
             details,
             location,
             coordinates, // Added coordinates
+            blcoordinates, // Added coordinates
+            brcoordinates, // Added coordinates
+            trcoordinates, // Added coordinates
+            tlcoordinates, // Added coordinates
             specificationtype,
             addspecification,
             additionalinfo
@@ -391,6 +395,10 @@ export async function uploadcreatelisting_product(req, res) {
             details,
             location,
             coordinates: coordinates ? coordinates.split(',').map(Number) : [0,0],
+            blcoordinates: blcoordinates ? blcoordinates.split(',').map(Number) : [0,0],
+            brcoordinates: brcoordinates ? brcoordinates.split(',').map(Number) : [0,0],
+            trcoordinates: trcoordinates ? trcoordinates.split(',').map(Number) : [0,0],
+            tlcoordinates: tlcoordinates ? tlcoordinates.split(',').map(Number) : [0,0],
             specificationtype,
             addspecification,
             additionalinfo,

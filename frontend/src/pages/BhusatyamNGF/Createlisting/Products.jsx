@@ -749,7 +749,7 @@ function Products() {
           id="bounding-box-layer"
           type="line"
           paint={{
-            "line-color": "red",
+            "line-color": "black",
             "line-width": 2,
           }}
         />

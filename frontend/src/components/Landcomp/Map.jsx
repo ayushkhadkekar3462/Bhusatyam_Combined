@@ -194,59 +194,117 @@ const Map = () => {
     }
   }, [lng, lat, zoom, selectedLat, selectedLng]);
 
-  // Add markers to the map
+  // Add markers and layers after map style is loaded
   useEffect(() => {
     if (!map.current || properties.length === 0) return;
 
-    properties.forEach((item) => {
-      let coordinates = [];
+    map.current.on('load', () => {
+      properties.forEach((item) => {
+        let coordinates = [];
 
-      // Validate and set coordinates
-      if (Array.isArray(item.coordinates) && item.coordinates.length === 2) {
-        // Ensure both values in the array are numbers
-        coordinates = item.coordinates.map((coord) => Number(coord));
-      }
+        // Validate and set coordinates
+        if (Array.isArray(item.coordinates) && item.coordinates.length === 2) {
+          coordinates = item.coordinates.map((coord) => Number(coord));
+        }
 
-      // If coordinates are valid, render the marker
-      if (coordinates.length === 2 && coordinates.every(coord => !isNaN(coord))) {
-        const el = document.createElement('div');
-        el.className = 'marker';
-        el.innerHTML = '<img class="markerimg" src="https://png.pngtree.com/png-vector/20201109/ourmid/pngtree-vector-location-icon-png-image_2413694.jpg" />';
+        // If coordinates are valid, render the marker
+        if (coordinates.length === 2 && coordinates.every(coord => !isNaN(coord))) {
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.innerHTML = '<img class="markerimg" src="https://png.pngtree.com/png-vector/20201109/ourmid/pngtree-vector-location-icon-png-image_2413694.jpg" />';
 
-        const handleMarkerClick = () => {
-          if (currentPopup) {
-            currentPopup.remove();
-          }
-          const imageUrl = encodeURI(`http://localhost:8080/${item.image.trim()}`);
+          const handleMarkerClick = () => {
+            if (currentPopup) {
+              currentPopup.remove();
+            }
+            const imageUrl = encodeURI(`http://localhost:8080/${item.image.trim()}`);
 
-          const newPopup = new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(`
-              <div class="popup-card">
-                <div class="popup-image" style="background-image: url('${imageUrl.replace('%5C','/').replace('%20C','C')}');"></div>
-                <div class="popup-content">
-                  <h2>${item.product}</h2>
-                  <p>${item.details}</p>
+            const newPopup = new mapboxgl.Popup()
+              .setLngLat(coordinates)
+              .setHTML(`
+                <div class="popup-card">
+                  <div class="popup-image" style="background-image: url('${imageUrl.replace('%5C','/').replace('%20C','C')}');"></div>
+                  <div class="popup-content">
+                    <h2>${item.product}</h2>
+                    <p>${item.details}</p>
+                  </div>
                 </div>
-              </div>
-            `)
+              `)
+              .addTo(map.current);
+
+            setCurrentPopup(newPopup);
+          };
+
+          el.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent map click event
+            handleMarkerClick();
+          });
+
+          new mapboxgl.Marker(el)
+            .setLngLat(coordinates)
             .addTo(map.current);
+        } else {
+          console.warn('Invalid coordinates:', item.coordinates);
+        }
 
-          setCurrentPopup(newPopup);
-        };
+        // Add bounding box if all corner coordinates are provided
+        if (
+          item.blcoordinates?.length === 2 &&
+          item.brcoordinates?.length === 2 &&
+          item.trcoordinates?.length === 2 &&
+          item.tlcoordinates?.length === 2
+        ) {
+          const boundingBoxCoordinates = [
+            item.blcoordinates,  // bottom-left
+            item.brcoordinates,  // bottom-right
+            item.trcoordinates,  // top-right
+            item.tlcoordinates,  // top-left
+            item.blcoordinates   // close the loop
+          ];
 
-        el.addEventListener('click', (e) => {
-          e.stopPropagation(); // Prevent map click event
-          handleMarkerClick();
-        });
-
-        new mapboxgl.Marker(el)
-          .setLngLat(coordinates)
-          .addTo(map.current);
-      } else {
-        console.warn('Invalid coordinates:', item.coordinates);
-      }
+          map.current.addLayer({
+            id: `boundingBox-fill-${item.product}`,
+            type: 'fill',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                geometry: {
+                  type: 'Polygon',
+                  coordinates: [boundingBoxCoordinates],
+                },
+              },
+            },
+            layout: {},
+            paint: {
+              'fill-color': 'rgba(255, 0, 31, 0.5)', // Red color for the bounding box
+              "fill-opacity": 0.5,
+            },
+          });
+          map.current.addLayer({
+            id: `boundingBox-line-${item.product}`,
+            type: 'line',
+            source: {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                geometry: {
+                  type: 'Polygon',
+                  coordinates: [boundingBoxCoordinates],
+                },
+              },
+            },
+            layout: {},
+            paint: {
+              "line-color": "black",
+            "line-width": 1,
+            },
+          });
+          
+        }
+      });
     });
+    
 
     // Close popups when clicking outside
     const handleMapClick = () => {
@@ -283,4 +341,5 @@ const Map = () => {
 };
 
 export default Map;
+
 

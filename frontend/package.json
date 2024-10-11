@@ -15,6 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@google/earthengine": "^0.1.416",
+    "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@react-google-maps/api": "^2.19.3",
     "axios": "^1.7.4",
     "bootstrap": "^5.3.3",

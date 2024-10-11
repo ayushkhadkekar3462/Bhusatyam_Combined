@@ -14,7 +14,7 @@
   .image-upload-section {
     /* flex: 4 1 200px; */
     padding: 20px;
-    width: 500px;
+    width: max(70%,340px);
     min-width: 200px;
     /* border: 2px solid yellow; */
   }

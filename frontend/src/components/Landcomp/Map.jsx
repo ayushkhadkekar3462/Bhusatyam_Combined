@@ -162,7 +162,7 @@ const Map = () => {
   // Fetch the product listing data
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/getcreatelisting_products') // Adjust the URL based on your server setup
+      .get('http://localhost:8080/api/getcreatelisting_products')
       .then((response) => {
         console.log('Fetched properties:', response.data); 
         setProperties(response.data);
@@ -174,7 +174,7 @@ const Map = () => {
 
   // Initialize the map
   useEffect(() => {
-    if (map.current) return; // Initialize map only once
+    if (map.current) return; // Prevent map from being initialized multiple times
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/standard-satellite',
@@ -190,24 +190,24 @@ const Map = () => {
 
     if (selectedLat && selectedLng) {
       map.current.setCenter([selectedLng, selectedLat]);
-      map.current.setZoom(12); // Adjust zoom level as needed
+      map.current.setZoom(12);
     }
   }, [lng, lat, zoom, selectedLat, selectedLng]);
 
-  // Add markers and layers after map style is loaded
+  // Add markers and bounding boxes after the map is loaded
   useEffect(() => {
     if (!map.current || properties.length === 0) return;
-
+  
     map.current.on('load', () => {
-      properties.forEach((item) => {
+      properties.forEach((item, index) => { // Added index for unique IDs
         let coordinates = [];
-
+  
         // Validate and set coordinates
         if (Array.isArray(item.coordinates) && item.coordinates.length === 2) {
           coordinates = item.coordinates.map((coord) => Number(coord));
         }
-
-        // If coordinates are valid, render the marker
+  
+        // Add marker if coordinates are valid
         if (coordinates.length === 2 && coordinates.every(coord => !isNaN(coord))) {
           const el = document.createElement('div');
           el.className = 'marker';
@@ -217,26 +217,27 @@ const Map = () => {
             if (currentPopup) {
               currentPopup.remove();
             }
+
             const imageUrl = encodeURI(`http://localhost:8080/${item.image.trim()}`);
 
             const newPopup = new mapboxgl.Popup()
               .setLngLat(coordinates)
-              .setHTML(`
-                <div class="popup-card">
-                  <div class="popup-image" style="background-image: url('${imageUrl.replace('%5C','/').replace('%20C','C')}');"></div>
+              .setHTML(
+                `<div class="popup-card">
+                  <div class="popup-image" style="background-image: url('${imageUrl.replace('%5C', '/').replace('%20C', 'C')}');"></div>
                   <div class="popup-content">
                     <h2>${item.product}</h2>
                     <p>${item.details}</p>
                   </div>
-                </div>
-              `)
+                </div>`
+              )
               .addTo(map.current);
 
             setCurrentPopup(newPopup);
           };
 
           el.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent map click event
+            e.stopPropagation();
             handleMarkerClick();
           });
 
@@ -246,65 +247,60 @@ const Map = () => {
         } else {
           console.warn('Invalid coordinates:', item.coordinates);
         }
-
-        // Add bounding box if all corner coordinates are provided
-        if (
-          item.blcoordinates?.length === 2 &&
-          item.brcoordinates?.length === 2 &&
-          item.trcoordinates?.length === 2 &&
-          item.tlcoordinates?.length === 2
-        ) {
-          const boundingBoxCoordinates = [
-            item.blcoordinates,  // bottom-left
-            item.brcoordinates,  // bottom-right
-            item.trcoordinates,  // top-right
-            item.tlcoordinates,  // top-left
-            item.blcoordinates   // close the loop
-          ];
-
-          map.current.addLayer({
-            id: `boundingBox-fill-${item.product}`,
-            type: 'fill',
-            source: {
+  
+        // Add bounding box if it exists
+        if (Array.isArray(item.boundingBox) && item.boundingBox.length > 0) {
+          const boundingBoxCoordinates = item.boundingBox.map(coord => coord.map(Number));
+  
+          // Create unique IDs using the index
+          const sourceId = `boundingBox-source-${item.product}-${index}`; // Unique source ID
+          const fillLayerId = `boundingBox-fill-${item.product}-${index}`; // Unique fill layer ID
+          const lineLayerId = `boundingBox-line-${item.product}-${index}`; // Unique line layer ID
+  
+          // Check if the source already exists
+          if (!map.current.getSource(sourceId)) {
+            map.current.addSource(sourceId, {
               type: 'geojson',
               data: {
-                type: 'Feature',
+                type: 'Feature',  
                 geometry: {
                   type: 'Polygon',
-                  coordinates: [boundingBoxCoordinates],
+                  coordinates: [boundingBoxCoordinates], // Directly use the bounding box coordinates
                 },
               },
-            },
-            layout: {},
-            paint: {
-              'fill-color': 'rgba(255, 0, 31, 0.5)', // Red color for the bounding box
-              "fill-opacity": 0.5,
-            },
-          });
-          map.current.addLayer({
-            id: `boundingBox-line-${item.product}`,
-            type: 'line',
-            source: {
-              type: 'geojson',
-              data: {
-                type: 'Feature',
-                geometry: {
-                  type: 'Polygon',
-                  coordinates: [boundingBoxCoordinates],
-                },
+            });
+          }
+  
+          // Add the bounding box polygon (fill layer) with green fill
+          if (!map.current.getLayer(fillLayerId)) {
+            map.current.addLayer({
+              id: fillLayerId,
+              type: 'fill',
+              source: sourceId,
+              layout: {},
+              paint: {
+                'fill-color': 'rgba(0, 255, 0, 0.4)', //Green color for the bounding box
+                'fill-opacity': 0.4,
               },
-            },
-            layout: {},
-            paint: {
-              "line-color": "black",
-            "line-width": 1,
-            },
-          });
-          
+            });
+          }
+  
+          // Add the bounding box outline (line layer)
+          if (!map.current.getLayer(lineLayerId)) {
+            map.current.addLayer({
+              id: lineLayerId,
+              type: 'line',
+              source: sourceId,
+              layout: {},
+              paint: {
+                'line-color': 'black',
+                'line-width': 1,
+              },
+            });
+          }
         }
       });
     });
-    
 
     // Close popups when clicking outside
     const handleMapClick = () => {
@@ -317,11 +313,9 @@ const Map = () => {
     map.current.on('click', handleMapClick);
 
     const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        if (currentPopup) {
-          currentPopup.remove();
-          setCurrentPopup(null);
-        }
+      if (e.key === 'Escape' && currentPopup) {
+        currentPopup.remove();
+        setCurrentPopup(null);
       }
     };
 
@@ -329,7 +323,7 @@ const Map = () => {
 
     return () => {
       window.removeEventListener('keydown', handleEscape);
-      map.current.off('click', handleMapClick); // Clean up event listener
+      map.current.off('click', handleMapClick);
     };
   }, [properties, currentPopup]);
 
@@ -341,5 +335,14 @@ const Map = () => {
 };
 
 export default Map;
+
+
+
+
+
+
+
+
+
 
 

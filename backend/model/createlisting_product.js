@@ -55,22 +55,6 @@ export const createlisting_productSchema = new mongoose.Schema({
         type: [Number], // Array of numbers for [longitude, latitude]
         required: [false, "Please provide coordinates"],
     },
-    blcoordinates: {
-        type: [Number], // Array of numbers for [longitude, latitude]
-        required: [false, "Please provide coordinates"],
-    },
-    brcoordinates: {
-        type: [Number], // Array of numbers for [longitude, latitude]
-        required: [false, "Please provide coordinates"],
-    },
-    trcoordinates: {
-        type: [Number], // Array of numbers for [longitude, latitude]
-        required: [false, "Please provide coordinates"],
-    },
-    tlcoordinates: {
-        type: [Number], // Array of numbers for [longitude, latitude]
-        required: [false, "Please provide coordinates"],
-    },
     specificationtype: {
         type: String,
         required: [false, "Please provide specificationtype"],
@@ -91,6 +75,10 @@ export const createlisting_productSchema = new mongoose.Schema({
         required: [false, "Please provide additionalinfo"],
         unique: false,
     },
+    boundingBox: {
+        type: [[Number]], // This stores an array of [longitude, latitude] arrays (for each vertex of the polygon)
+        required: true,
+      }
 });
 
 const createlisting_product = mongoose.model('createlisting_product', createlisting_productSchema);

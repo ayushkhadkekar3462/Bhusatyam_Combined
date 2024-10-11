@@ -360,26 +360,33 @@ export async function uploadcreatelisting_product(req, res) {
             price,
             details,
             location,
-            coordinates, // Added coordinates
-            blcoordinates, // Added coordinates
-            brcoordinates, // Added coordinates
-            trcoordinates, // Added coordinates
-            tlcoordinates, // Added coordinates
+            coordinates,
+            boundingBox, // Correct bounding box coordinates field
             specificationtype,
             addspecification,
             additionalinfo
         } = req.body;
 
-        // Validate required fields except image
-        // if (!category || !cropyear || !product || !type || !unitofmeasure || !expirydate || !total || !price || !details || !location || !specificationtype || !addspecification || !additionalinfo) {
-        //     return res.status(400).send({ error: "All fields except image are required" });
-        // }
+        console.log(req.body); // Log the incoming request body
 
         // Set the image field if a file was uploaded
         const imagePath = req.file ? req.file.path : null;
 
         if (!imagePath) {
             return res.status(400).send({ error: "Image is required" });
+        }
+
+        // Validate and parse the bounding box safely
+        let parsedBoundingBox = [];
+        if (boundingBox) {
+            try {
+                parsedBoundingBox = JSON.parse(boundingBox);
+                if (!Array.isArray(parsedBoundingBox) || parsedBoundingBox.length < 3) {
+                    return res.status(400).send({ error: "Bounding box must be an array of coordinates." });
+                }
+            } catch (err) {
+                return res.status(400).send({ error: "Invalid bounding box format." });
+            }
         }
 
         // Create a new product listing document
@@ -394,11 +401,8 @@ export async function uploadcreatelisting_product(req, res) {
             price,
             details,
             location,
-            coordinates: coordinates ? coordinates.split(',').map(Number) : [0,0],
-            blcoordinates: blcoordinates ? blcoordinates.split(',').map(Number) : [0,0],
-            brcoordinates: brcoordinates ? brcoordinates.split(',').map(Number) : [0,0],
-            trcoordinates: trcoordinates ? trcoordinates.split(',').map(Number) : [0,0],
-            tlcoordinates: tlcoordinates ? tlcoordinates.split(',').map(Number) : [0,0],
+            coordinates: coordinates ? coordinates.split(',').map(Number) : [0, 0],
+            boundingBox: parsedBoundingBox, // Correct handling for bounding box coordinates
             specificationtype,
             addspecification,
             additionalinfo,
@@ -423,6 +427,10 @@ export async function uploadcreatelisting_product(req, res) {
         return res.status(500).send({ error: errorMessage });
     }
 }
+
+
+
+
 
 
 export const getcreatelisting_products = async (req, res) => {

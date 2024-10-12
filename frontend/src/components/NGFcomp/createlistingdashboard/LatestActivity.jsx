@@ -50,69 +50,70 @@ const LatestActivity = () => {
 
   return (
     <div className="latest-activity-container">
-      <h2 className="latest-activity-title">Latest Products</h2>
-      
-      {/* Display User Products */}
-      {userProducts.length > 0 ? (
-        userProducts.map((product, index) => (
-          <Link 
-            key={index} 
-            to={`/productdetails/${product._id}`} // Use dynamic URL
-            state={{ product }} // Pass product details via state
-            className="activity-item"
-          >
-            <div className="activity-icon">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_AMqDpIyRxL2VctHjMZPeJh-Y-A7BDGBPow&s" alt="Product Icon" />
-            </div>
-            <div className="activity-details">
-              <span className="activity-product">{product.product}</span>
-              <span className="activity-alert">ALERT: NEW</span>
-              <p className="activity-description">
-                {product.product} Product Created...
-              </p>
-            </div>
-            <div className="activity-badge">
-              <span className="badge-text">PRODUCT</span>
-              <span className="activity-time">Uploaded: {new Date(product.createdAt).toLocaleString()}</span>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <div style={{ fontSize: "30px", fontFamily: "poppins", color: "red" }}>
-          NO PRODUCT ACTIVITIES YET
-        </div>
-      )}
-        <h2 className="latest-activity-title" style={{marginTop:"10px"}}>Latest Contracts</h2>
-      {/* Display User Contracts */}
-      {userContracts.length > 0 ? (
-        userContracts.map((contract, index) => (
-          <Link 
-            key={index} 
-            // to={`/contractdetails/${contract._id}`} // Use dynamic URL
-            state={{ contract }} // Pass contract details via state
-            className="activity-item"
-          >
-            <div className="activity-icon">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_AMqDpIyRxL2VctHjMZPeJh-Y-A7BDGBPow&s" alt="Contract Icon" />
-            </div>
-            <div className="activity-details">
-              <span className="activity-product">{contract.product}</span>
-              <span className="activity-alert">ALERT: NEW</span>
-              <p className="activity-description">
-                {contract.product} Contract Created...
-              </p>
-            </div>
-            <div className="activity-badge">
-              <span className="badge-text2">CONTRACT</span>
-              <span className="activity-time">Uploaded: {new Date(contract.createdAt).toLocaleString()}</span>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <div style={{ fontSize: "30px", fontFamily: "poppins", color: "red" }}>
-          NO CONTRACT ACTIVITIES YET
-        </div>
-      )}
+      <div className="products-section">
+        <h2 className="latest-activity-title">Latest Products</h2>
+        
+        {/* Display User Products */}
+        {userProducts.length > 0 ? (
+          userProducts.map((product, index) => (
+            <Link 
+              key={index} 
+              to={`/productdetails/${product._id}`} // Use dynamic URL
+              state={{ product }} // Pass product details via state
+              className="activity-item"
+            >
+              <div className="activity-icon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_AMqDpIyRxL2VctHjMZPeJh-Y-A7BDGBPow&s" alt="Product Icon" />
+              </div>
+              <div className="activity-details">
+                <span className="activity-product">{product.product}</span>
+                <span className="activity-alert">ALERT: NEW</span>
+                <p className="activity-description">
+                  {product.product} Product Created...
+                </p>
+              </div>
+              <div className="activity-badge">
+                <span className="badge-text">PRODUCT</span>
+                <span className="activity-time">Uploaded: {new Date(product.createdAt).toLocaleString()}</span>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="no-activity-message">NO PRODUCT ACTIVITIES YET</div>
+        )}
+      </div>
+
+      <div className="contracts-section">
+        <h2 className="latest-activity-title">Latest Contracts</h2>
+        
+        {/* Display User Contracts */}
+        {userContracts.length > 0 ? (
+          userContracts.map((contract, index) => (
+            <Link 
+              key={index} 
+              state={{ contract }} // Pass contract details via state
+              className="activity-item"
+            >
+              <div className="activity-icon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_AMqDpIyRxL2VctHjMZPeJh-Y-A7BDGBPow&s" alt="Contract Icon" />
+              </div>
+              <div className="activity-details">
+                <span className="activity-product">{contract.product}</span>
+                <span className="activity-alert">ALERT: NEW</span>
+                <p className="activity-description">
+                  {contract.product} Contract Created...
+                </p>
+              </div>
+              <div className="activity-badge">
+                <span className="badge-text2">CONTRACT</span>
+                <span className="activity-time">Uploaded: {new Date(contract.createdAt).toLocaleString()}</span>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="no-activity-message">NO CONTRACT ACTIVITIES YET</div>
+        )}
+      </div>
     </div>
   );
 };

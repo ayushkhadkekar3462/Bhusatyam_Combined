@@ -79,8 +79,13 @@ export const createlisting_productioncontractSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide additional information"],
     unique: false,
-  }
-});
+  },
+  username: {
+    type: String,
+    required: true,
+    ref: 'User',  // Reference the User model by username
+}
+},{ timestamps: true });
 
 const createlisting_productioncontract = mongoose.model('createlisting_productioncontract', createlisting_productioncontractSchema);
 export default createlisting_productioncontract;

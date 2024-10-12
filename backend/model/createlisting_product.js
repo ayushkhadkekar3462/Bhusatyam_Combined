@@ -85,7 +85,7 @@ export const createlisting_productSchema = new mongoose.Schema({
         required: true,
         ref: 'User',  // Reference the User model by username
     }
-});
+},{ timestamps: true });
 
 const createlisting_product = mongoose.model('createlisting_product', createlisting_productSchema);
 export default createlisting_product;

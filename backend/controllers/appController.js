@@ -469,7 +469,8 @@ export async function uploadcreatelisting_productioncontract(req, res) {
             location,
             specificationtype,
             addspecification,
-            additionalinfo
+            additionalinfo,
+            username
         } = req.body;
 
         console.log(req.body); // Log the incoming request body
@@ -494,7 +495,8 @@ export async function uploadcreatelisting_productioncontract(req, res) {
             location,
             specificationtype,
             addspecification,
-            additionalinfo
+            additionalinfo,
+            username
         });
 
         // Save the contract to the database

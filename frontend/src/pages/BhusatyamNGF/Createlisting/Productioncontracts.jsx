@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import '../../../styles/NGFpagestyle/pagestyle/Productioncontracts.css';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 function Productioncontracts() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,24 @@ function Productioncontracts() {
     addspecification: '',
     additionalinfo: ''
   });
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Retrieve the JWT from local storage
+    
+    if (token) {
+      try {
+        // Decode the JWT to extract the username
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        // Assuming the username is stored in the 'username' field
+        setFormData((prevData) => ({
+          ...prevData,
+          username: decodedToken.username || "", // Append username to formData
+        }));
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+  }, []); // Run this effect only once when the component mounts
 
   const handleChange = (e) => {
     const { name, value } = e.target;

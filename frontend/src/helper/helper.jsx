@@ -142,3 +142,19 @@ export const uploadProduct = async (formData) => {
       throw error;
     }
   };
+
+
+  export const uploadProductionContract = async (formData) => {
+    try {
+      const response = await axios.post("/api/uploadcreatelisting_productioncontract", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error uploading production contract:", error);
+      throw error;
+    }
+  };
+  

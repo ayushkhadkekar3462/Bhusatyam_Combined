@@ -1,5 +1,6 @@
 import UserModel from '../model/User.model.js'
 import createlisting_product, { createlisting_productSchema } from '../model/createlisting_product.js';
+import createlisting_productioncontract, { createlisting_productioncontractSchema } from '../model/createlisting_productioncontract.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ENV from '../config.js'
@@ -442,3 +443,82 @@ export const getcreatelisting_products = async (req, res) => {
     }
   };
   
+
+  // for createlisting_productioncontracts
+
+//   import createlisting_productioncontract from '../models/createlisting_productioncontract.js'; // Import the schema model
+
+export async function uploadcreatelisting_productioncontract(req, res) {
+    try {
+        const {
+            category,
+            cropyear,
+            product,
+            type,
+            variety,
+            actOfGod,
+            acres,
+            unitofmeasure,
+            guaranteed,
+            priceoption,
+            price,
+            details,
+            location,
+            specificationtype,
+            addspecification,
+            additionalinfo
+        } = req.body;
+
+        console.log(req.body); // Log the incoming request body
+
+        // Validate and parse the bounding box safely (if needed for future implementation)
+        // Removed because not in the schema
+
+        // Create a new production contract document
+        const newContract = new createlisting_productioncontract({
+            category,
+            cropyear,
+            product,
+            type,
+            variety,
+            actOfGod,
+            acres,
+            unitofmeasure,
+            guaranteed,
+            priceoption,
+            price,
+            details,
+            location,
+            specificationtype,
+            addspecification,
+            additionalinfo
+        });
+
+        // Save the contract to the database
+        const savedContract = await newContract.save();
+
+        // Respond with success message and the saved contract
+        return res.status(201).send({ msg: "Production contract created successfully", data: savedContract });
+
+    } catch (error) {
+        console.error("Error during production contract creation:", error);
+
+        const errorMessage = error.message || "An unknown error occurred during production contract creation";
+
+        if (error.name === "ValidationError") {
+            return res.status(400).send({ error: errorMessage });
+        }
+
+        return res.status(500).send({ error: errorMessage });
+    }
+}
+
+// Controller function to get all production contracts
+export const getcreatelisting_productioncontracts = async (req, res) => {
+    try {
+        const contracts = await createlisting_productioncontract.find(); // Retrieve all contracts
+        res.status(200).json(contracts);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error', error });
+    }
+};

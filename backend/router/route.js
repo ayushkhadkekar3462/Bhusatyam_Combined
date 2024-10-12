@@ -2,6 +2,7 @@ import { Router } from "express";
 const router = Router();
 import {upload} from "../middleware/multer.middleware.js";
 import {uploadcreatelisting_product} from "../controllers/appController.js";
+import {uploadcreatelisting_productioncontract} from "../controllers/appController.js";
 /** import all controllers */
 import * as controller from "../controllers/appController.js";
 import { registerMail } from "../controllers/mailer.js";
@@ -36,6 +37,10 @@ router
 router.post('/uploadcreatelisting_product', upload.single('image'), uploadcreatelisting_product);
 
   router.route("/getcreatelisting_products").get(controller.getcreatelisting_products);
+
+  router.post('/uploadcreatelisting_productioncontract', uploadcreatelisting_productioncontract);
+
+  router.route("/getcreatelisting_productioncontracts").get(controller.getcreatelisting_productioncontracts);
 
 
 export default router;

@@ -238,6 +238,12 @@ import mapboxgl from 'mapbox-gl';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import "../../../styles/NGFpagestyle/pagestyle/Products.css";
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import { jwtDecode } from 'jwt-decode';
+
+
+
+
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXl1c2hraGFka2VrYXIiLCJhIjoiY2x6ZWY0dzR2MG9zcTJxcXE5dWQ4czA5ZSJ9.4VTm_Sy8KPMq6lY9-jatJA';
 
@@ -260,7 +266,27 @@ function Products() {
     additionalinfo: "",
     coordinates: [],
     boundingBox: [],  // for bounding box coordinates
+    username:""
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Retrieve the JWT from local storage
+    
+    if (token) {
+      try {
+        // Decode the JWT to extract the username
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        // Assuming the username is stored in the 'username' field
+        setFormData((prevData) => ({
+          ...prevData,
+          username: decodedToken.username || "", // Append username to formData
+        }));
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+  }, []); // Run this effect only once when the component mounts
 
   const mapContainer = useRef(null);
   const map = useRef(null);

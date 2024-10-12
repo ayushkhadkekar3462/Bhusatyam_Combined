@@ -1,49 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../styles/NGFpagestyle/pagestyle/Dashboard.css';
 import Products from '../../../components/NGFcomp/createlistingdashboard/LatestActivity';
 import ProductDetails from '../../../components/NGFcomp/createlistingdashboard/productsdetails';
+import { jwtDecode } from 'jwt-decode'; // Import jwtDecode
 
+const Dashboard = ({ product }) => {
+  const [userId, setUserId] = useState(null); // State to hold the decoded userId
 
-const Dashboard = ({product}) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Fetch the token from local storage
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token); // Decode the token
+        setUserId(decodedToken.userId); // Extract userId and update the state
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+  }, []);
+
   return (
     <>
-    <div className="dashboard-container1">
-      <header className="dashboard-header1">
-        <span>User ID: dtOBDp9EYP</span>
-        <h1>Dashboard</h1>
-      </header>
-      <div className="dashboard-content1">
-        {/* <div className="activity-section1">
-          <h2>Latest Activity</h2>
-          <p>You have no activity.</p>
-        </div> */}
-        <Products/>
-        <div className="card-section1">
-          <Card
-            title="Products Wish List"
-            description="You have not saved any listings to your profile."
-            buttonText="FIND PRODUCTS"
-          />
-          <Card
-            title="My Products"
-            description="You have not listed any Products on the Marketplace."
-            buttonText="NEW PRODUCT"
-          />
-          <Card
-            title="My Production Contracts"
-            description="You have not listed any Production Contracts."
-            buttonText="NEW PRODUCTION CONTRACT"
-          />
+      <div className="dashboard-container1">
+        <header className="dashboard-header1">
+          <span>User ID: {userId ? userId : 'Loading...'}</span> {/* Display the userId */}
+          <h1>Dashboard</h1>
+        </header>
+        <div className="dashboard-content1">
+          <Products />
+          <div className="card-section1">
+            <Card
+              title="Products Wish List"
+              description="You have not saved any listings to your profile."
+              buttonText="FIND PRODUCTS"
+            />
+            <Card
+              title="My Products"
+              description="You have not listed any Products on the Marketplace."
+              buttonText="NEW PRODUCT"
+            />
+            <Card
+              title="My Production Contracts"
+              description="You have not listed any Production Contracts."
+              buttonText="NEW PRODUCTION CONTRACT"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    {/* {product ? (
-        <ProductDetails product={product} />
-      ) : (
-        <div>Loading product details...</div>
-      )} */}
-    {/* <ProductDetails product={product} />  */}
-    {/* <Products/> */}
     </>
   );
 };

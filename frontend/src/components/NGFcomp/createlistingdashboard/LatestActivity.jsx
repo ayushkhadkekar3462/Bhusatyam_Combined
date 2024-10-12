@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode'; // Correct import for jwtDecode
 import { Link } from 'react-router-dom';
-import "../../../styles/NGFpagestyle/compstyles/dashboardstyles/products.css"
+import "../../../styles/NGFpagestyle/compstyles/dashboardstyles/products.css";
 
 const LatestActivity = () => {
   const [products, setProducts] = useState([]);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
+    // Fetch and decode the token to get the username
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUsername(decodedToken.username); // Assuming the token contains 'username'
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    }
+
+    // Fetch products
     axios
       .get('http://localhost:8080/api/getcreatelisting_products') // Adjust the URL based on your server setup
       .then((response) => {
@@ -17,11 +31,14 @@ const LatestActivity = () => {
       });
   }, []);
 
+  // Filter products by username
+  const userProducts = products.filter(product => product.username === username);
+
   return (
     <div className="latest-activity-container">
       <h2 className="latest-activity-title">Latest Activity</h2>
-      {products.length > 0 ? (
-        products.map((product, index) => (
+      {userProducts.length > 0 ? (
+        userProducts.map((product, index) => (
           <Link 
             key={index} 
             to={`/productdetails/${product._id}`} // Use dynamic URL

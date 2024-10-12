@@ -365,7 +365,8 @@ export async function uploadcreatelisting_product(req, res) {
             boundingBox, // Correct bounding box coordinates field
             specificationtype,
             addspecification,
-            additionalinfo
+            additionalinfo,
+            username // Username is always present, so we directly include it
         } = req.body;
 
         console.log(req.body); // Log the incoming request body
@@ -407,7 +408,8 @@ export async function uploadcreatelisting_product(req, res) {
             specificationtype,
             addspecification,
             additionalinfo,
-            image: imagePath
+            image: imagePath,
+            username // Include the username directly
         });
 
         // Save the listing to the database
@@ -428,6 +430,7 @@ export async function uploadcreatelisting_product(req, res) {
         return res.status(500).send({ error: errorMessage });
     }
 }
+
 
 
 

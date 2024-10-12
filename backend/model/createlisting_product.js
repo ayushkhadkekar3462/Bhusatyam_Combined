@@ -72,13 +72,19 @@ export const createlisting_productSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: [false, "Please provide additionalinfo"],
+        required: [false, "Please provide image"],
         unique: false,
     },
     boundingBox: {
         type: [[Number]], // This stores an array of [longitude, latitude] arrays (for each vertex of the polygon)
         required: true,
-      }
+    },
+    // Add a reference to the User model via the username
+    username: {
+        type: String,
+        required: true,
+        ref: 'User',  // Reference the User model by username
+    }
 });
 
 const createlisting_product = mongoose.model('createlisting_product', createlisting_productSchema);

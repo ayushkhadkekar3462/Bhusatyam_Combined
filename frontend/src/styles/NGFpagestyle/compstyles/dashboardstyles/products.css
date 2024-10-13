@@ -26,12 +26,21 @@
   .contracts-section {
     flex: 1; /* Each section takes available space */
     overflow-y: auto; /* Enable vertical scrolling */
-    padding: 10px;
+    padding: 0px;
     max-height: 65vh;
+  }
+  .contracts-section
+  {
+    margin-top: 20px;
+    padding: 0px;
+    position: relative;
+    bottom:30px;
   }
 
   .products-section {
     border-bottom: 2px solid #e1e1e1;
+    position: relative;
+    bottom: 10px;
  
   }
 

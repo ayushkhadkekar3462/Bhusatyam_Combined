@@ -50,8 +50,9 @@ const LatestActivity = () => {
 
   return (
     <div className="latest-activity-container">
+      <h2 className="latest-activity-title">Latest Products</h2>
       <div className="products-section">
-        <h2 className="latest-activity-title">Latest Products</h2>
+        
         
         {/* Display User Products */}
         {userProducts.length > 0 ? (
@@ -83,8 +84,9 @@ const LatestActivity = () => {
         )}
       </div>
 
+      <h2 className="latest-activity-title" style={{marginTop:"10px"}}>Latest Contracts</h2>
       <div className="contracts-section">
-        <h2 className="latest-activity-title">Latest Contracts</h2>
+        
         
         {/* Display User Contracts */}
         {userContracts.length > 0 ? (

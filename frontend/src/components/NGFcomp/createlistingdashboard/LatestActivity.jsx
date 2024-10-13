@@ -10,12 +10,11 @@ const LatestActivity = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    // Fetch and decode the token to get the username
     const token = localStorage.getItem('token');
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
-        setUsername(decodedToken.username); // Assuming the token contains 'username'
+        setUsername(decodedToken.username); 
       } catch (error) {
         console.error('Error decoding token:', error);
       }
@@ -23,9 +22,9 @@ const LatestActivity = () => {
 
     // Fetch products
     axios
-      .get('http://localhost:8080/api/getcreatelisting_products') // Adjust the URL based on your server setup
+      .get('http://localhost:8080/api/getcreatelisting_products')
       .then((response) => {
-        const sortedProducts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort products by timestamp
+        const sortedProducts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setProducts(sortedProducts);
       })
       .catch((error) => {
@@ -34,9 +33,9 @@ const LatestActivity = () => {
 
     // Fetch contracts
     axios
-      .get('http://localhost:8080/api/getcreatelisting_productioncontracts') // Adjust the URL for contracts
+      .get('http://localhost:8080/api/getcreatelisting_productioncontracts')
       .then((response) => {
-        const sortedContracts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort contracts by timestamp
+        const sortedContracts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setContracts(sortedContracts);
       })
       .catch((error) => {
@@ -44,7 +43,6 @@ const LatestActivity = () => {
       });
   }, []);
 
-  // Filter products and contracts by username
   const userProducts = products.filter(product => product.username === username);
   const userContracts = contracts.filter(contract => contract.username === username);
 
@@ -52,15 +50,12 @@ const LatestActivity = () => {
     <div className="latest-activity-container">
       <h2 className="latest-activity-title">Latest Products</h2>
       <div className="products-section">
-        
-        
-        {/* Display User Products */}
         {userProducts.length > 0 ? (
           userProducts.map((product, index) => (
             <Link 
               key={index} 
-              to={`/productdetails/${product._id}`} // Use dynamic URL
-              state={{ product }} // Pass product details via state
+              to={`/productdetails/${product._id}`} 
+              state={{ product }} 
               className="activity-item"
             >
               <div className="activity-icon">
@@ -86,14 +81,12 @@ const LatestActivity = () => {
 
       <h2 className="latest-activity-title" style={{marginTop:"10px"}}>Latest Contracts</h2>
       <div className="contracts-section">
-        
-        
-        {/* Display User Contracts */}
         {userContracts.length > 0 ? (
           userContracts.map((contract, index) => (
             <Link 
               key={index} 
-              state={{ contract }} // Pass contract details via state
+              to={`/contractdetails/${contract._id}`} // Dynamic route for contract details
+              state={{ contract }} 
               className="activity-item"
             >
               <div className="activity-icon">

@@ -8,7 +8,7 @@ const Layout = () => {
   // Use regex to match paths with dynamic IDs like /productdetails/:id
   const showSidebar = ['/dashboard', '/marketplace', '/Product', '/Productioncontract', '/Productbid', '/Productbids', '/Productioncontracts', '/Products', '/CProductbids', '/Negotiationitems', '/CProductioncontracts', '/CProducts', '/Support', '/setting']
     .some(path => location.pathname.startsWith(path)) ||
-    /^\/productdetails\/[a-zA-Z0-9]+$/.test(location.pathname);  // Add dynamic product detail route check
+    /^\/productdetails\/[a-zA-Z0-9]+$/.test(location.pathname)||/^\/contractdetails\/[a-zA-Z0-9]+$/.test(location.pathname);  // Add dynamic product detail route check
 
   return (
     <>

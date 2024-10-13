@@ -36,6 +36,7 @@ import Postproperty from '../components/Landcomp/Postproperty.jsx';
 import FindAgent from '../components/Landcomp/FindAgent.jsx';
 import { ProtectRoute } from './protect/protectroute.jsx';
 import Detailedproduct from '../components/NGFcomp/createlistingdashboard/detailedproduct.jsx';
+import DetailedContract from '../components/NGFcomp/createlistingdashboard/detailedcontract.jsx';
 
 function Pages() {
   return (
@@ -63,6 +64,7 @@ function Pages() {
               <Routes>
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="/productdetails/:id" element={<Detailedproduct />} />
+                <Route path="/contractdetails/:id" element={<DetailedContract />} />
                 <Route path="marketplace" element={<Marketplace />} />
                 <Route path="Product" element={<Product />} />
                 <Route path="Productioncontract" element={<Productioncontract />} />

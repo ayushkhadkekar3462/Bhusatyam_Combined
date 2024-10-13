@@ -14,7 +14,7 @@ const DetailedProduct = () => {
         {/* <button className="a-back-button" onClick={() => navigate(-1)}>← Back</button> */}
         <h1>{product?.product || "a-Product Name"}</h1>
         <p>{product?.category || "a-Category"}</p>
-        <p className="a-product-id">ID: {product?._id || "ID not available"}</p>
+        <p className="a-product-id">ProductID: {product?._id || "ID not available"}</p>
       </div>
 
       <div className="a-product-content">

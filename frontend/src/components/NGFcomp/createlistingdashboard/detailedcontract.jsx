@@ -9,21 +9,20 @@ const DetailedContract = () => {
 
   return (
     <div className="radish-cover-crop-container">
-      <div className="header">
-        {/* <div className="back-arrow" onClick={() => navigate(-1)}>←</div> */}
-        <div className="title">
-          <h1>{contract?.product || "Contract Name"}</h1>
-          <p>{contract?.username ? `Contract ID: ${contract._id}` : "User ID not available"}</p>
-        </div>
+      <div className="a-contract-header">
+        {/* <button className="a-back-button" onClick={() => navigate(-1)}>← Back</button> */}
+        <h1>{contract?.product || "a-Contract Name"}</h1>
+        <p>{contract?.category || "a-Category"}</p>
+        <p className="a-contract-id">ContractID: {contract?._id || "ID not available"}</p>
       </div>
       <div className="content">
-        <h2>{contract?.product || "Contract Title"}</h2>
-        <h3>{contract?.category || "Category"}</h3>
+        {/* <h2>{contract?.product || "Contract Title"}</h2>
+        <h3>{contract?.category || "Category"}</h3> */}
         <table className="info-table ">
           <tbody>
             <tr>
               <td>GUARANTEED PURCHASE</td>
-              <td>{contract?.guaranteedPurchase || "N/A"}</td>
+              <td>{contract?.guaranteed || "N/A"}</td>
             </tr>
             <tr>
               <td>CASH PRICE (PER CWT)</td>
@@ -31,7 +30,7 @@ const DetailedContract = () => {
             </tr>
             <tr>
               <td>AOG (ACT OF GOD)</td>
-              <td>{contract?.aog ? "Yes" : "No"}</td>
+              <td>{contract?.actOfGod ? "Yes" : "No"}</td>
             </tr>
             <tr>
               <td>CROP YEAR</td>
@@ -43,7 +42,7 @@ const DetailedContract = () => {
             </tr>
             <tr>
               <td>TOTAL NUMBER OF ACRES</td>
-              <td>{contract?.totalAcres || "N/A"}</td>
+              <td>{contract?.acres || "N/A"}</td>
             </tr>
             <tr>
               <td>DETAILS</td>

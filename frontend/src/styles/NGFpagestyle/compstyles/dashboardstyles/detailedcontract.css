@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1400px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #e7f3eb;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  /* max-width: 2500px; */
+  /* margin-left: 10px; */
+  /* padding: 20px; */
+  background-color: #e3eae6;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   font-family: Arial, sans-serif;
 }
 .a-contract-header {
@@ -17,8 +18,9 @@
   align-items: flex-start;
   background-color: #2d2d2d;
   color: #fff;
-  padding: 20px;
-  border-radius: 8px 8px 0 0;
+  padding: 30px;
+  width: 102.2%;
+  /* border-radius: 8px 8px 0 0; */
   flex-wrap: wrap; /* Ensures the header content wraps on smaller screens */
 }
 .a-contract-header h1 {
@@ -88,7 +90,7 @@
 
 .back-button,
 .edit-button {
-  background-color: #4CAF50;
+  background: #7ec313;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -103,7 +105,7 @@
 
 .back-button:hover,
 .edit-button:hover {
-  background-color: #45a049;
+  background: #88d11b;
 }
 
 /* Responsive styling */

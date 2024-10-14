@@ -5,6 +5,11 @@
 body {
   background-color: #e3eae6;
 }
+main {
+  padding-top: 0 !important;
+  margin: 0 !important;
+  padding-left: 35px !important;
+}
 /* index.css */
 
 .dark #moonicon {

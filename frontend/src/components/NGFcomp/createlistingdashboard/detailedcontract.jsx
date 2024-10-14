@@ -51,7 +51,7 @@ const DetailedContract = () => {
           </tbody>
         </table>
         <div className="buttons">
-          <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+          <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
           {/* <button className="edit-button">Edit</button> */}
         </div>
       </div>

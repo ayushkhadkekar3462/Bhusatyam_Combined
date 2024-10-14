@@ -163,7 +163,7 @@ function Products() {
 
   return (
     <div style={{ borderRadius: "10px", display: "flex", flexDirection: "column" }}>
-      <div className="header-Product">Marketplace</div>
+      <div className="header-Product">New Product</div>
       <div className="products-container" style={{ display: "flex", justifyContent: "space-between" }}>
         
         <div style={{ width: "40%", marginRight: "20px" }}>

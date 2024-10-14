@@ -7,10 +7,11 @@
 .header-Product {
   font-size: 27px;
   color: #fff;
-  background-color: #333;
-  padding: 25px;
+  background-color: #2c2c2c;
+  padding: 29px;
   text-align: left;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  width: 101.16%;
 }
 
 .filters-Product {

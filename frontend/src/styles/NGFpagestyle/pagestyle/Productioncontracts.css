@@ -1,15 +1,20 @@
-.pageheader{
-  display: grid;
-  place-items: start;
-  padding: 5px 0 5px 10px;
- width: 80vw;
+.pageheader {
+  display: flex;
   align-items: center;
-font-size: 4vh;
-  border: 2px solid black;
-  border-radius: 10px;
-  color: white;
+  width: 101%;
+  font-size: 17px;
+  padding: 21px;
+  margin: 0; /* Ensures no margin above the header */
+  border: 0px solid black;
+  color: rgb(238, 238, 238);
   background-color: #2c2c2c;
+  border-radius: 0px;
+  position: relative; /* This allows the header to be positioned normally in the flow */
+  top: 0; /* Ensures it touches the top */
 }
+
+
+
 /* UniqueForm.css */
 
 
@@ -17,7 +22,7 @@ font-size: 4vh;
   max-width: 70vw ;
   margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   border-radius: 8px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
@@ -50,7 +55,7 @@ font-size: 4vh;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 .unique-textarea {
@@ -103,6 +108,18 @@ font-size: 4vh;
 
 .unique-button:hover {
   background-color: #0056b3;
+}
+
+.form-submit-btn1
+{
+  background: #7ec313;
+padding: 9px;
+padding-left:16px ;
+padding-right:16px ;
+border-radius: 6px;
+color: white;
+position: relative;
+left: 11px;
 }
 
 /* Responsive styles */

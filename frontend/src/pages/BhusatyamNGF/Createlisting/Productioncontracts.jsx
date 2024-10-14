@@ -56,7 +56,7 @@ function Productioncontracts() {
       alert('Production contract submitted successfully!');
     } catch (error) {
       console.error('Error submitting the form:', error);
-      alert('There was an error submitting the production contract.');
+      alert('Please fill all the input fields correctly.');
     }
   };
 
@@ -66,7 +66,7 @@ function Productioncontracts() {
         <h1>New Production Contract</h1>
       </div>
       <div className="unique-form-container">
-        <h2 className="unique-form-title">General</h2>
+        {/* <h2 className="unique-form-title">General</h2> */}
         <form className="unique-form" onSubmit={handleSubmit}>
           {/* Form Fields */}
           <div className="unique-form-group category-group">
@@ -274,7 +274,7 @@ function Productioncontracts() {
 
           {/* Certifications Section */}
           <div className="form-section1">
-            <h2>Certifications</h2>
+            <h1 style={{fontSize:"24px",fontWeight:"bold"}}>Certifications</h1>
             <div className="certifications-group1">
               <button type="button" className="add-certification-btn1">Add Required Certification</button>
               <div className="form-group1">
@@ -331,7 +331,7 @@ function Productioncontracts() {
           {/* Submit Button */}
           <div className="form-submit-section1">
             <button type="submit" className="form-submit-btn1">
-              Submit Production Contract Offer
+              Submit 
             </button>
           </div>
         </form>

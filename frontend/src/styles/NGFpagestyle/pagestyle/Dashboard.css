@@ -60,7 +60,20 @@ body {
     gap: 20px;
     width: 50%;
   }
+
+  .card-section-product {
+    /* overflow-y: auto; */
+    max-height: calc(4 * 100px); /* Height for 4 items */
+    overflow-y: auto; /* Enable scrolling */
+  }
   
+   .card-section-contract {
+    /* overflow-y: auto; */
+    margin-top: -250px;
+    width: 100%;
+    max-height: calc(4 * 100px); /* Height for 4 items */
+    overflow-y: auto; /* Enable scrolling */
+   }
   .card1 {
     background-color: #e7f3eb;
     padding: 20px;

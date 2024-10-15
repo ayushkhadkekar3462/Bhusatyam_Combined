@@ -7,7 +7,7 @@
     width: 80%;
     min-width: 250px;
     margin: 0;
-    height: auto; /* Set height for scrollable sections */
+    height: fit-content; /* Set height for scrollable sections */
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Prevent overflow of the container */

@@ -21,7 +21,7 @@
 
 .product-image {
   width: 100%;
-  height: 150px; /* Ensure a consistent image height */
+  height: 100px; /* Ensure a consistent image height */
   margin-bottom: 10px;
 }
 

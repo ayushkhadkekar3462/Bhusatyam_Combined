@@ -166,7 +166,7 @@ const Map = () => {
     Wheat: 'yellow', // Darker red (OrangeRed)
     Jute: 'red', // Darker aqua (DarkCyan)
     Sugarcane: 'chartreuse', // Darker blue (SteelBlue)
-    Maize: 'cornflowerblue', // Darker yellow (Gold)
+    Maize: 'aqua', // Darker yellow (Gold)
     Rice: 'white', // Darker purple (BlueViolet)
   };
   
@@ -394,23 +394,40 @@ const Map = () => {
     };
   }, [properties, selectedProducts, mapLoaded]);
 
+  const [filterOpen, setFilterOpen] = useState(false);
+  const toggleFilter = () => {
+    setFilterOpen(!filterOpen);
+  };
+
   return (
     <div style={{ width: '100%', height: '100%' }}>
       {/* Checkbox Filters */}
-      <div style={{ position: 'absolute', zIndex: 1, background: 'white', padding: '10px', borderRadius: '5px' }}>
-        <h4>Filter by Product:</h4>
-        {['Wheat', 'Jute', 'Sugarcane', 'Maize', 'Rice'].map((product) => (
-          <label key={product} style={{ display: 'block', cursor: 'pointer' }}>
-            <input
-              type="checkbox"
-              name={product}
-              checked={selectedProducts[product] || false}
-              onChange={handleCheckboxChange}
-            />
-            {product}
-          </label>
-        ))}
+      <div className="filter-wrapper">
+      {/* Small Box (clickable) */}
+      <div className="toggle-filter" onClick={toggleFilter}>
+        {filterOpen ? 'Close Filters' : 'Open Filters'}
       </div>
+
+      {/* Popup Filter Box */}
+      {filterOpen && (
+        <div className="filter-popup">
+          {/* <h3>Filter Products</h3> */}
+          {['Wheat', 'Jute', 'Sugarcane', 'Maize', 'Rice'].map((product) => (
+            <label key={product}>
+              <input
+                type="checkbox"
+                name={product}
+                checked={selectedProducts[product] || false}
+                onChange={handleCheckboxChange}
+              />
+              {product}
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+
+
 
       <div ref={mapContainer} className="map-container" style={{ width: '100%', height: '100%' }} />
     </div>
